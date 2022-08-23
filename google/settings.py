@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -28,7 +27,6 @@ DEBUG = False
 # DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -74,7 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'google.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -87,7 +84,7 @@ DATABASES = {
         'HOST': 'rm-2vc5xhi77ulz46a8nuo.mysql.cn-chengdu.rds.aliyuncs.com',
         'PORT': '3306',
     },
-    'beijingdb':{
+    'beijingdb': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ApiRecord',
         'USER': 'root',
@@ -97,7 +94,6 @@ DATABASES = {
     }
 
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -139,9 +135,10 @@ VERSION = '1.0'
 
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 部署更改如下： 1.debug  2. static file   3. middleware    4.tools->proxies
 
 
-MAX_REQUEST_NEARBY=1000
-MAX_REQUEST_DETAIL=1500
+MAX_REQUEST_NEARBY = 1000
+MAX_REQUEST_DETAIL = 1500
+google_map_key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"

@@ -40,7 +40,6 @@ def save_db(count1=0,count2=0):
         print(e)
 
 
-
 # Create your views here.
 def google(request):
     if request.session.get('is_login'):
@@ -253,12 +252,13 @@ def login(request):
             # 但是此方法不好，该每次发送请求，都要向主服务器查询，最好改成：
             # ****（主服务器执行一键下线后，给当前web项目发送请求，告知当前项目哪一个客户下线了，在此web项目中加以判断，后续优化！！）
             # print(1)
-            url = 'http://www.sstrade.net:8080/ssapi/query_is_login?session_key=%s' % session_key
-            url = 'http://www.sstrade.net:8888/ssapi/query_is_login?session_key=%s' % session_key
-            print(url)
-            res = requests.get(url)
+            # url = 'http://www.sstrade.net:8080/ssapi/query_is_login?session_key=%s' % session_key
+            # url = 'http://www.sstrade.net:8888/ssapi/query_is_login?session_key=%s' % session_key
+            # print(url)
+            # res = requests.get(url)
             # print(2)
-            if res.content.decode() == 'yes':
+            # if res.content.decode() == 'yes':
+            if 1:
                 print('当前浏览器中存储的用户cookie：session_key在服务器端有对应的记录，即该用户是登录状态！')
                 record = CustLoginRecord.objects.filter(oa_session_key=session_key)
                 if record:
@@ -551,7 +551,7 @@ def search_word(request):
 
 """
 def search_detail(place_id,word):
-    key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+    key = settings.google_map_key
     language = 'zh-CN'
     fields = 'address_component,adr_address,business_status,formatted_address,geometry,icon,name,permanently_closed,photo,place_id,plus_code,type,url,utc_offset,vicinity,' \
              'price_level,rating,review,user_ratings_total,' \
@@ -632,7 +632,7 @@ def search_place_text(request):
     # lng = request.POST.get('lng')
     word = request.POST.get('word')
     # radius = request.POST.get('radius')
-    key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+    key = settings.google_map_key
     fields = 'place_id,formatted_address,name,types,geometry'
     language = 'en'
     url = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?' \
@@ -713,7 +713,7 @@ def search_near_by_latlng(lat, lng, word, radius):
     location = '%s,%s' % (lat, lng)
     radius = radius
     query = word
-    key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+    key = settings.google_map_key
     language = 'en'
     # 第一次发送请求搜寻地点获取 地点id,方便后续地点详情使用。
     url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&radius=%s&language=%s&keyword=%s&key=%s' \
@@ -734,7 +734,7 @@ def search_near_by(lat, lng, word, radius,cname):
     # location = '%s,%s' % (lat, lng)
     # radius = radius
     # query = word
-    # key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+    # key = settings.google_map_key
     # language = 'zh-CN'
     # # 第一次发送请求搜寻地点获取 地点id,方便后续地点详情使用。
     # url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&radius=%s&language=%s&keyword=%s&key=%s' \
@@ -787,7 +787,7 @@ def search_near_by(lat, lng, word, radius,cname):
             print('下一页的token：%s' % next_page_token)
             # data['test'].extend([1,2])
             print('还有数据，接着请求！')
-            key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+            key = settings.google_map_key
             next_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=%s&pagetoken=%s" % (
             key, next_page_token)
             next_res = requests.get(next_url)
@@ -921,7 +921,7 @@ def search_detail(place_id, word, p_obj,cname):
         rc = RequestDetailCount.objects.create(count=0,month=month,year=year,customer=cust_name)
 
 
-    key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+    key = settings.google_map_key
     language = 'en'
     fields = 'address_component,adr_address,business_status,formatted_address,geometry,icon,name,permanently_closed,photo,place_id,plus_code,type,url,utc_offset,vicinity,' \
              'price_level,rating,review,user_ratings_total,' \
@@ -1168,7 +1168,7 @@ def extra_search_near_by(lat, lng, word, radius,cname):
                 print('下一页的token：%s' % next_page_token)
                 # data['test'].extend([1,2])
                 print('还有数据，接着请求！')
-                key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+                key = settings.google_map_key
                 next_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=%s&pagetoken=%s" % (
                     key, next_page_token)
                 next_res = requests.get(next_url)

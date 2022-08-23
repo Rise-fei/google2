@@ -1,10 +1,12 @@
 import requests
 import json
-
+from django.conf import settings
 
 # ret = requests.get("http://www.google.com")
 # print(ret.content)
-key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+
+
+key = settings.google_map_key
 language = 'en'
 fields = 'address_component,adr_address,business_status,formatted_address,geometry,icon,name,permanently_closed,photo,place_id,plus_code,type,url,utc_offset,vicinity,' \
          'price_level,rating,review,user_ratings_total,' \

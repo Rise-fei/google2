@@ -4,7 +4,7 @@
 #     location = '%s,%s' % (lat, lng)
 #     radius = radius
 #     query = word
-#     key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+#     key = settings.google_map_key
 #     language = 'en'
 #     # 第一次发送请求搜寻地点获取 地点id,方便后续地点详情使用。
 #     url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&radius=%s&language=%s&keyword=%s&key=%s' \
@@ -19,7 +19,7 @@
 #     return data
 #
 # def search_detail(place_id, word):
-#     key = 'AIzaSyC2VUsehdGp0LS7uZgETWd_OoBA7DpHIYU'
+#     key = settings.google_map_key
 #     language = 'en'
 #     fields = 'address_component,adr_address,business_status,formatted_address,geometry,icon,name,permanently_closed,photo,place_id,plus_code,type,url,utc_offset,vicinity,' \
 #              'price_level,rating,review,user_ratings_total,' \
