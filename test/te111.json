@@ -1,0 +1,801 @@
+{
+    "html_attributions": [],
+    "next_page_token": "CqQCFgEAAHKdeC6Swmw5VU5EeGpP1ar6MqmH_9oZi0MHhtfMsLxbStlOfFkTb88SMBt7C5phXJA23GoVXp1DclCsvNSDtM01MdDRPOriiXbJ0dQYy95vlX9uvR_ynwXVazWkkMJpeFEicGMOh5-4o2NjCwFcW2WGYeYP_YCBWRQAVC6lv5tuXtmQrPb6fhQ25dKwHaSM1q50Vk-xkwORTICc4fR9jd0OkIn48TE5JpWyW9bOSjjBFOVVt-xbFH-gkATAD4Zpn1WSRmLy4r8d5CtDKKADcDWqM14SIsGTKuZ5hjt3wQAVmY5Je3quIY2ZQWcrFFcJi7C1raiW2Fr0uyd9-YPL2byFrd7kz7m4uP7rfQhtUr6us3to2v0K3ELKM0fPW-wdaxIQpCKkue3O1Rr8aZWZv0P8OBoUTIVuE6BGEWwmm_5v5AIPgngjlBA",
+    "results": [
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.8671425,
+                    "lng": 116.312703
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.86846602989272,
+                        "lng": 116.3140533798927
+                    },
+                    "southwest": {
+                        "lat": 39.86576637010727,
+                        "lng": 116.3113537201073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "6c5df6fec5eb3aa59aafb4228a8de98ebe9bba40",
+            "name": "左右沙发",
+            "place_id": "ChIJ3xCqXY9O8DURsM4uy7o5hz0",
+            "plus_code": {
+                "compound_code": "V887+V3 Fengtai District, Beijing, China",
+                "global_code": "8PFRV887+V3"
+            },
+            "rating": 0,
+            "reference": "ChIJ3xCqXY9O8DURsM4uy7o5hz0",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "W 3rd Ring Rd S, Fengtai District"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.9581773,
+                    "lng": 116.2885162
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.95951112989273,
+                        "lng": 116.2898675798928
+                    },
+                    "southwest": {
+                        "lat": 39.95681147010728,
+                        "lng": 116.2871679201073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "61da36980543f521a8b08a3fc996f611e5474e63",
+            "name": "利豪沙发",
+            "place_id": "ChIJX5W8MwZR8DURrtQyXyHZ5cM",
+            "plus_code": {
+                "compound_code": "X75Q+7C Haidian District, Beijing, China",
+                "global_code": "8PFRX75Q+7C"
+            },
+            "rating": 0,
+            "reference": "ChIJX5W8MwZR8DURrtQyXyHZ5cM",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "1 Yuanda Rd, Haidian District"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.86034799999999,
+                    "lng": 116.466579
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.86180697989271,
+                        "lng": 116.4679652298928
+                    },
+                    "southwest": {
+                        "lat": 39.85910732010727,
+                        "lng": 116.4652655701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "2c672be9c3f186c2a8098287ba6a56c05c738333",
+            "name": "依诺维绅",
+            "place_id": "ChIJW7_g4Ymy8TURr__XpPhFs9o",
+            "plus_code": {
+                "compound_code": "VF68+4J Chaoyang, Beijing, China",
+                "global_code": "8PFRVF68+4J"
+            },
+            "rating": 0,
+            "reference": "ChIJW7_g4Ymy8TURr__XpPhFs9o",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Beijing, Chaoyang, 大羊坊路居然之家4号楼4-3-003室"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.83535,
+                    "lng": 116.448384
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.83670127989272,
+                        "lng": 116.4491849798927
+                    },
+                    "southwest": {
+                        "lat": 39.83400162010728,
+                        "lng": 116.4464853201073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "16dfe05e955f05defce54eed77a6f2417f1970f1",
+            "name": "Kaidiwei Sofa",
+            "place_id": "ChIJUYimAxyz8TURSUj3f4g8LtU",
+            "plus_code": {
+                "compound_code": "RCPX+49 Chaoyang, Beijing, China",
+                "global_code": "8PFRRCPX+49"
+            },
+            "rating": 0,
+            "reference": "ChIJUYimAxyz8TURSUj3f4g8LtU",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "308 Chengshousi Rd, Chaoyang"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.9581773,
+                    "lng": 116.2885162
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.95951112989273,
+                        "lng": 116.2898675798928
+                    },
+                    "southwest": {
+                        "lat": 39.95681147010728,
+                        "lng": 116.2871679201073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "53fffa48d9af6251fc3679f15111f1df9e53f057",
+            "name": "依诺维绅",
+            "place_id": "ChIJX5W8MwZR8DURrOabe40-PL4",
+            "plus_code": {
+                "compound_code": "X75Q+7C Haidian District, Beijing, China",
+                "global_code": "8PFRX75Q+7C"
+            },
+            "rating": 0,
+            "reference": "ChIJX5W8MwZR8DURrOabe40-PL4",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "1 Yuanda Rd, Haidian District"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.69272,
+                    "lng": 116.257186
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.69410467989272,
+                        "lng": 116.2587910298927
+                    },
+                    "southwest": {
+                        "lat": 39.69140502010728,
+                        "lng": 116.2560913701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "7734484e90e74b140f4fc0d9c924786cb23752b0",
+            "name": "Junsheng Sofa Hardware Parts",
+            "place_id": "ChIJ2de3Hcsw8DURmVfBeXZYbAE",
+            "plus_code": {
+                "compound_code": "M7V4+3V Daxing District, Beijing, China",
+                "global_code": "8PFRM7V4+3V"
+            },
+            "rating": 0,
+            "reference": "ChIJ2de3Hcsw8DURmVfBeXZYbAE",
+            "scope": "GOOGLE",
+            "types": [
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Daxing District, Heshun S St, 和顺南街交叉口附近"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.964806,
+                    "lng": 116.5304634
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.96619922989273,
+                        "lng": 116.5317988298927
+                    },
+                    "southwest": {
+                        "lat": 39.96349957010728,
+                        "lng": 116.5290991701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "14c732b44fc3aab33c82824bd877e014b2ef92ce",
+            "name": "Lanlin Sofa Material",
+            "place_id": "ChIJD4A7k3Gp8TUR0Q_b7yn-uGs",
+            "plus_code": {
+                "compound_code": "XG7J+W5 Chaoyang, Beijing, China",
+                "global_code": "8PFRXG7J+W5"
+            },
+            "rating": 0,
+            "reference": "ChIJD4A7k3Gp8TUR0Q_b7yn-uGs",
+            "scope": "GOOGLE",
+            "types": [
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Qikeshu Rd, Chaoyang"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.938692,
+                    "lng": 116.393343
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.94002547989273,
+                        "lng": 116.3946746298927
+                    },
+                    "southwest": {
+                        "lat": 39.93732582010728,
+                        "lng": 116.3919749701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/cafe-71.png",
+            "id": "c615655c7650a60bb07468a7add9a2a62984a523",
+            "name": "Cafe De Sofa",
+            "photos": [
+                {
+                    "height": 2400,
+                    "html_attributions": [
+                        "<a href=\"https://maps.google.com/maps/contrib/115700677728754363634\">Ryan McCarthy</a>"
+                    ],
+                    "photo_reference": "CmRaAAAAuoRLDs2l4MA5e8vS77RrAyrTMv72Y0wNMK_Xm74cZUYM_de8Z4bXMIn0t4ilrhgBAbwS5gv5ri1HdWR_YlJ6CHEUAEkQoa_arfdJuznA1ojK-UqmRfDPXer1O1_HQKx7EhDdN4c4oPA2yWe50gQleCTVGhTkROXY66jEmLOhlpUlv7KRdczW0g",
+                    "width": 3200
+                }
+            ],
+            "place_id": "ChIJQWIpMRhT8DURhNAv0jVJVwA",
+            "plus_code": {
+                "compound_code": "W9QV+F8 Xicheng District, Beijing, China",
+                "global_code": "8PFRW9QV+F8"
+            },
+            "rating": 3.9,
+            "reference": "ChIJQWIpMRhT8DURhNAv0jVJVwA",
+            "scope": "GOOGLE",
+            "types": [
+                "cafe",
+                "food",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 13,
+            "vicinity": "Xicheng District, 银锭桥胡同12号"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.834456,
+                    "lng": 116.447931
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.83572702989272,
+                        "lng": 116.4492771298927
+                    },
+                    "southwest": {
+                        "lat": 39.83302737010727,
+                        "lng": 116.4465774701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "088042c620d9753f6476391d46c15cb3cd405e33",
+            "name": "芝华仕",
+            "place_id": "ChIJGzOuRRmz8TURWlmyA3yjMn4",
+            "plus_code": {
+                "compound_code": "RCMX+Q5 Chaoyang, Beijing, China",
+                "global_code": "8PFRRCMX+Q5"
+            },
+            "rating": 0,
+            "reference": "ChIJGzOuRRmz8TURWlmyA3yjMn4",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Beijing, Chaoyang, 成寿寺路308号城外诚家居文化广场2F"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.789531,
+                    "lng": 116.324323
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.79103887989272,
+                        "lng": 116.3256729298927
+                    },
+                    "southwest": {
+                        "lat": 39.78833922010728,
+                        "lng": 116.3229732701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "1733ac1bb620e43ab8175a7e42f164037177c3be",
+            "name": "IKEA",
+            "photos": [
+                {
+                    "height": 2448,
+                    "html_attributions": [
+                        "<a href=\"https://maps.google.com/maps/contrib/102105943772398193027\">Sar Chanrithy</a>"
+                    ],
+                    "photo_reference": "CmRaAAAAPunu6__92-d3gK8E4LWhBG2fENEwIndJRHXxbW89aRWyRjxTaMinhrXP2lvedgOtBlTAC2Q4EkBMq3xIa2yLOi05Kifxhz9wLuagfqi5st2M8LP4KO7CwcR4TmsqC1ggEhAgiqvyr3DTOpcY-uCHnZp7GhRHsdNodUk5H-jWgY48BZph4_LN8Q",
+                    "width": 3264
+                }
+            ],
+            "place_id": "ChIJjfEbdSpK8DURyFSgh-zmMpw",
+            "plus_code": {
+                "compound_code": "Q8QF+RP Daxing District, Beijing, China",
+                "global_code": "8PFRQ8QF+RP"
+            },
+            "rating": 4.7,
+            "reference": "ChIJjfEbdSpK8DURyFSgh-zmMpw",
+            "scope": "GOOGLE",
+            "types": [
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 26,
+            "vicinity": "Daxing District"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.87201,
+                    "lng": 116.310225
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.87324692989272,
+                        "lng": 116.3116578298927
+                    },
+                    "southwest": {
+                        "lat": 39.87054727010728,
+                        "lng": 116.3089581701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "d39ada4e7b87412eb9d6f0006a9d6e79ef97b3c3",
+            "name": "芝华仕",
+            "place_id": "ChIJ6W23TIhO8DURL7qwOEgfRL4",
+            "plus_code": {
+                "compound_code": "V8C6+R3 Fengtai District, Beijing, China",
+                "global_code": "8PFRV8C6+R3"
+            },
+            "rating": 0,
+            "reference": "ChIJ6W23TIhO8DURL7qwOEgfRL4",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Beijing, Fengtai District, 西三环南路居然之家2F"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.86034799999999,
+                    "lng": 116.466579
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.86180697989271,
+                        "lng": 116.4679652298928
+                    },
+                    "southwest": {
+                        "lat": 39.85910732010727,
+                        "lng": 116.4652655701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "6988d4900d5bb746e6fbbd5644d45116d716e7e3",
+            "name": "芝华仕",
+            "place_id": "ChIJW7_g4Ymy8TUReGTqIiLjeyc",
+            "plus_code": {
+                "compound_code": "VF68+4J Chaoyang, Beijing, China",
+                "global_code": "8PFRVF68+4J"
+            },
+            "rating": 0,
+            "reference": "ChIJW7_g4Ymy8TUReGTqIiLjeyc",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Beijing, Chaoyang, 大羊坊路居然之家4号楼4-3-017室"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.977598,
+                    "lng": 116.463529
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.97880047989272,
+                        "lng": 116.4651137798927
+                    },
+                    "southwest": {
+                        "lat": 39.97610082010728,
+                        "lng": 116.4624141201073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "06b97cbb71268cd9f96b53d0d3f379a1722b580b",
+            "name": "Ikea",
+            "opening_hours": {},
+            "photos": [
+                {
+                    "height": 2736,
+                    "html_attributions": [
+                        "<a href=\"https://maps.google.com/maps/contrib/111071090134245304935\">John B</a>"
+                    ],
+                    "photo_reference": "CmRaAAAAGcrMqSii-GfgkCotBYlz6YyXKX5I0ZoJ6pSKeIOaZXFMM1NzCQcqGYOKehqi9w7Nvnyvd86W0Rq3NdDB5bh1yDLYClpWNka2gSoRgmyP-zUeq5jtvEQhaaOiOCXUQ-MGEhCvbtW0kebdRKCFyMWHy1NrGhTiEnA3rS9suPdxYpTWSKjRleBBYQ",
+                    "width": 3648
+                }
+            ],
+            "place_id": "ChIJOWyIGQmr8TUR1iGy6JFHbeI",
+            "plus_code": {
+                "compound_code": "XFH7+2C Chaoyang, Beijing, China",
+                "global_code": "8PFRXFH7+2C"
+            },
+            "rating": 4.3,
+            "reference": "ChIJOWyIGQmr8TUR1iGy6JFHbeI",
+            "scope": "GOOGLE",
+            "types": [
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 63,
+            "vicinity": "59 Futong E St, Wangjing Subdistrict, Chaoyang"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.9895423,
+                    "lng": 116.4177133
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.99089487989271,
+                        "lng": 116.4189658298927
+                    },
+                    "southwest": {
+                        "lat": 39.98819522010727,
+                        "lng": 116.4162661701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "8176a12b8ca3447dd4cc489ece3c51c807b58b7d",
+            "name": "BoConcept",
+            "place_id": "ChIJwwAbPs1U8DURkyu8VGCloes",
+            "plus_code": {
+                "compound_code": "XCQ9+R3 Chaoyang, Beijing, China",
+                "global_code": "8PFRXCQ9+R3"
+            },
+            "rating": 0,
+            "reference": "ChIJwwAbPs1U8DURkyu8VGCloes",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Huixin W St, Chaoyang"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.907208,
+                    "lng": 116.429989
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.90856037989273,
+                        "lng": 116.4316603798927
+                    },
+                    "southwest": {
+                        "lat": 39.90586072010728,
+                        "lng": 116.4289607201073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "6980f21a6c9dcf8e97c958df1d9e5c7468181d8f",
+            "name": "NATUZZI",
+            "place_id": "ChIJnWxqtzCt8TUREl_xgvh7x9s",
+            "plus_code": {
+                "compound_code": "WC4H+VX Dongcheng, Beijing, China",
+                "global_code": "8PFRWC4H+VX"
+            },
+            "rating": 0,
+            "reference": "ChIJnWxqtzCt8TUREl_xgvh7x9s",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "北京市东城区建国门内大街8号中粮广场B2楼A6-A9"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.9375197,
+                    "lng": 116.4550556
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.93886952989272,
+                        "lng": 116.4563860298927
+                    },
+                    "southwest": {
+                        "lat": 39.93616987010728,
+                        "lng": 116.4536863701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "c579550febb8c7c78acffb1c4a0b1a46b4d5d37b",
+            "name": "NATUZZI",
+            "place_id": "ChIJFU2SdZKs8TUR-tFtypgNkL4",
+            "plus_code": {
+                "compound_code": "WFQ4+22 Chaoyang, Beijing, China",
+                "global_code": "8PFRWFQ4+22"
+            },
+            "rating": 0,
+            "reference": "ChIJFU2SdZKs8TUR-tFtypgNkL4",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "11 Sanlitun Rd, Sanlitun, Chaoyang"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.907128,
+                    "lng": 116.42965
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.90847572989273,
+                        "lng": 116.4307341798927
+                    },
+                    "southwest": {
+                        "lat": 39.90577607010728,
+                        "lng": 116.4280345201073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+            "id": "3e1ee197a222e8a0f7a4355f97c40e8a1c726d10",
+            "name": "BoConcept",
+            "place_id": "ChIJOQkytjCt8TURw5DIIRpWPE0",
+            "plus_code": {
+                "compound_code": "WC4H+VV Dongcheng, Beijing, China",
+                "global_code": "8PFRWC4H+VV"
+            },
+            "rating": 0,
+            "reference": "ChIJOQkytjCt8TURw5DIIRpWPE0",
+            "scope": "GOOGLE",
+            "types": [
+                "furniture_store",
+                "home_goods_store",
+                "point_of_interest",
+                "store",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "8 Jianguomen Outer St, Dongcheng"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.863985,
+                    "lng": 116.461593
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.86535352989273,
+                        "lng": 116.4629633298927
+                    },
+                    "southwest": {
+                        "lat": 39.86265387010729,
+                        "lng": 116.4602636701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+            "id": "501532e7fe27d7b2fa8003aa1ab0a9c12ec3b020",
+            "name": "祥奉SOFA",
+            "place_id": "ChIJ1xlcxoiy8TURkWdyyRSnHW0",
+            "plus_code": {
+                "compound_code": "VF76+HJ Chaoyang, Beijing, China",
+                "global_code": "8PFRVF76+HJ"
+            },
+            "rating": 0,
+            "reference": "ChIJ1xlcxoiy8TURkWdyyRSnHW0",
+            "scope": "GOOGLE",
+            "types": [
+                "point_of_interest",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Beijing, Chaoyang, 大羊坊路美联天地"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.91422800000001,
+                    "lng": 116.4361802
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.91557722989272,
+                        "lng": 116.4375300298928
+                    },
+                    "southwest": {
+                        "lat": 39.91287757010728,
+                        "lng": 116.4348303701073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+            "id": "132b1741658ea9ff77a34b3597484cabbc8f0da2",
+            "name": "Fa'er Sofa Leather Limited Company",
+            "place_id": "ChIJz5SPECSt8TURT1p6oEvvFgQ",
+            "plus_code": {
+                "compound_code": "WC7P+MF Chaoyang, Beijing, China",
+                "global_code": "8PFRWC7P+MF"
+            },
+            "rating": 0,
+            "reference": "ChIJz5SPECSt8TURT1p6oEvvFgQ",
+            "scope": "GOOGLE",
+            "types": [
+                "point_of_interest",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "12 Yabaolu, Chaoyang"
+        },
+        {
+            "business_status": "OPERATIONAL",
+            "geometry": {
+                "location": {
+                    "lat": 39.9025809,
+                    "lng": 116.4088048
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.90396187989273,
+                        "lng": 116.4101518798927
+                    },
+                    "southwest": {
+                        "lat": 39.90126222010728,
+                        "lng": 116.4074522201073
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+            "id": "fa4401c1db3d761d4d81df32bce44f4f28570662",
+            "name": "Cafe De SOFA",
+            "place_id": "ChIJuWdhSbdS8DURqZIAMM86vKg",
+            "rating": 0,
+            "reference": "ChIJuWdhSbdS8DURqZIAMM86vKg",
+            "scope": "GOOGLE",
+            "types": [
+                "point_of_interest",
+                "establishment"
+            ],
+            "user_ratings_total": 0,
+            "vicinity": "Dongjiaomin Alley, Dongcheng"
+        }
+    ],
+    "status": "OK"
+}

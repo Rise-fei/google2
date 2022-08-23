@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GMS Search Record</title>
+    <script type="text/javascript" src="/static/js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/static/css/query_db.css'/>
+    <script src='/static/js/FileSaver.js'></script>
+</head>
+<body style="overflow-y:scroll;">
+<div class="container-fluid" id="div_1">
+    <form class="form-inline">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="query_word">Query searched keyword records：</label>
+            <input type="text" class="form-control" placeholder="Please enter the keyword to query" id="query_word">
+            <select class="form-control" id="select_country">
+                <option value="all">All data</option>
+                <option value="all_detail">
+                    All searched data
+                </option>
+                <option value="not_detail">All data not searched</option>
+                {% for country in country_list %}
+                    {% if country.country %}
+                        <option value="{{ country.country }}">{{ country.country }}</option>
+                    {% endif %}
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <button id="query_btn" type="button" class="btn btn-primary">Query</button>
+        <a id="export_email" href="#" class="btn btn-warning">Export Email</a>
+        <div id="pro_bar" style="display:none;width: 100px;z-index: 10;position: fixed;top: 8px;right:60px">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0;">
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+    <table id="table_1" class="table table-bordered">
+        <thead>
+        <th style="width: 40px"><input type="checkbox"></th>
+        <th>Company</th>
+        <th>Website</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Facebook</th>
+        <th>Youtube</th>
+        <th>Twitter</th>
+        <th>Keyword</th>
+        <th style="width: 160px;">
+            <button id="search_detail" class="btn btn-default" type="button">Search</button>
+            <button id="delete_data" class="btn btn-default" type="button">Delete</button>
+        </th>
+        </thead>
+    </table>
+</div>
+<div class="container-fluid" id="div_2">
+    <table id="table_2" class="table table-bordered">
+        <tbody id="table_content">
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+
+    flag_search_all = false
+    $('#export_email').click(function () {
+        var li = $("input[class='data_td']:checked")
+        if (li.length == 0) {
+            alert('Please check the valid email and export！！！')
+        } else {
+            var final_email_str = "";
+            for (var i = 0; i < li.length; i++) {
+                var email_str = li.eq(i).parent().next().next().next().text()
+                if (email_str) {
+                    var word = li.eq(i).parent().siblings().eq(-2).text();
+                    var final_str = word + '|' + email_str.replace(/;/g, '\n' + word + '|') + '\n'
+                    final_email_str += final_str;
+                }
+            }
+            {#var a = $(this)[0]#}
+            {#a.href = 'data:attachment/csv,' + encodeURI(final_email_str);#}
+            {#a.target = '_blank';#}
+            {#a.download = 'email.csv';#}
+            var exportContent = "\uFEFF";
+            var blob = new Blob([exportContent + final_email_str], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, word + "_email.csv");
+        }
+    })
+
+    // 点击某一个具体的搜索详情
+    function click_search_detail() {
+        $('.search_detail_child').click(function () {
+            if (flag_search_all) {
+                alert('Please wait until the search task is finished！！！')
+            } else {
+                flag_search_all = true
+                var id_list = [];
+                var id = $(this).parent().parent().attr('id')
+                id_list.push(id)
+                // 将id_list 变为json串
+                var ids = JSON.stringify(id_list)
+                var index = 0;
+                $('.progress-bar').css('width', 0);
+                $('#pro_bar').css('display', 'block')
+                var t6 = window.setInterval(function () {
+                    if (index < 100) {
+                        index += 33;
+                        s = String(index) + '%'
+                        $('.progress-bar').css('width', s)
+                    }
+                    console.log(index)
+                }, 1000)
+
+                $.ajax({
+
+                    url: '/search_detail_by_ids/?place_ids=' + ids,
+                    type: 'get',
+                    success: function (ret) {
+                        window.clearInterval(t6);
+                        $('.progress-bar').css('width', '100%');
+                        setTimeout(function () {
+                            $('#pro_bar').css('display', 'none');
+                        }, 500)
+                        flag_search_all = false
+
+                        // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
+
+                        if (ret.code == 1) {
+                            var data = ret.data;
+                            for (var i = 0; i < data.length; i++) {
+                                var place_id = data[i].pid
+                                var td_html = data[i].td_html
+                                if (td_html) {
+                                    // 根据place_id 找到之前的tr，然后替换为新的td_html
+                                    var str_id = '#' + place_id;
+                                    $(str_id).replaceWith(td_html)
+                                } else {
+                                    // td_html = ‘’ 说明详情页中包含中文，不要该结果！！
+                                    var str_id = '#' + place_id;
+                                    $(str_id).remove();
+                                }
+                            }
+                            // click_a();
+                            // {#click_search_detail();#}
+                            click_delete();
+                        } else if (ret.code == -1) {
+                            alert(ret.msg);
+                        } else {
+                            var str_id = '#' + id;
+                            $(str_id).remove()
+                        }
+                    }
+                })
+            }
+        });
+    }
+
+    function click_delete() {
+        $('.delete_data_child').click(function () {
+            $(this).parent().parent().remove();
+        });
+    }
+
+
+    // 搜索所有选中td 的详情信息！！
+    $('#search_detail').click(function () {
+        if (flag_search_all) {
+            alert('Please wait for the search to complete！！！')
+        } else {
+            flag_search_all = true
+            var li = $("input[class='data_td']:checked")
+            var li_len = li.length;
+            var index = 0;
+            index_list = []
+            $('.progress-bar').css('width', 0);
+            $('#pro_bar').css('display', 'block')
+            t2 = window.setInterval(function () {
+                if (index_list.length < li_len) {
+                    //   i    /  l         index/i = 100/l    index = 100 * i / l
+                    //  index / 100
+                    index = 100 * index_list.length / li_len
+                    if (index > 100)
+                        index = 100;
+                    s = String(index) + '%'
+                    $('.progress-bar').css('width', s)
+                    console.log('**********' + index + '*********' + index_list)
+                } else {
+                    // 当全部tr的详情搜索完毕时，将flag设为false，将进度条去除。将计时器去除，添加点击定位坐标事件和删除tr事件
+                    flag_search_all = false
+                    $('#pro_bar').css('display', 'none');
+                    window.clearInterval(t2)
+                    // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
+                    //click_a();
+                    click_delete();
+                }
+                console.log('---------' + index)
+            }, 1000)
+
+            for (var i = 0; i < li.length; i++) {
+                var id_list = [];
+                // 将每一个勾选状态的 placeid 放到一个列表中
+                var id = $(li[i]).parent().parent().attr('id')
+                id_list.push(id)
+                // 将id_list 变为json串
+                var ids = JSON.stringify(id_list)
+                {#var li_len = li.length; // 1个3 秒   一共  3 * l * x = 100  x = 100/5/l = 20/l    100/l#}
+                $.ajax({
+                    url: '/search_detail_by_ids/?place_ids=' + ids,
+                    type: 'get',
+                    success: function (ret) {
+                        index_list.push(1)
+                        if (ret.code == 1) {
+                            // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
+                            var data = ret.data;
+                            for (var i = 0; i < data.length; i++) {
+                                var place_id = data[i].pid
+                                var td_html = data[i].td_html
+                                if (td_html) {
+                                    // 根据place_id 找到之前的tr，然后替换为新的td_html
+                                    var str_id = '#' + place_id;
+                                    $(str_id).replaceWith(td_html)
+                                } else {
+                                    // td_html = ‘’ 说明详情页中包含中文，不要该结果！！
+                                    var str_id = '#' + place_id;
+                                    $(str_id).remove();
+                                }
+                            }
+                            // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
+                            //  click_a();
+                            // click_delete();
+                        } else if (ret.code == -1) {
+                            alert(ret.msg);
+                        } else {
+                            var str_id = '#' + id;
+                            $(str_id).remove();
+                        }
+                    }
+                })
+            }
+        }
+
+
+    });
+
+    // 删除所选的 搜索结果！！！
+    $('#delete_data').click(function () {
+        $("input[class='data_td']:checked").parent().parent().remove();
+    });
+    // 控制全选和全不选！！！
+    $('th input:checkbox').change(function () {
+        var e = $(this)[0].checked;
+        if (e) {
+            $('input[class="data_td"]:checkbox').prop('checked', true);
+        } else {
+            $('input[class="data_td"]:checkbox').prop('checked', false);
+        }
+    });
+
+    $(function () {
+        $('#query_btn').click(function () {
+            var word = $('#query_word').val();
+            var country = $('#select_country').val();
+            $('#query_btn').text('Querying...');
+            $('#query_btn').prop('disabled',true);
+            setTimeout(function () {
+                alert("Querying database, please wait patiently.......")
+                $.ajax({
+                url: '/query_from_db/',
+                type: 'post',
+                async:false,
+                data: {
+                    'word': word,
+                    'country': country,
+                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+                },
+                success: function (ret) {
+                    if (ret.code == 1) {
+                        alert(ret.msg);
+                        {#console.log(ret.final_html)#}
+                        $('#table_content').append(ret.data);
+                        click_delete();
+                        click_search_detail();
+                    } else {
+                        alert(ret.msg)
+                    }
+                }
+            })
+                $('#query_btn').prop('disabled',false)
+                $('#query_btn').text('Query')
+            },500)
+
+
+
+        })
+    })
+</script>
+
+</body>
+
+
+</html>
