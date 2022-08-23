@@ -1,98 +1,98 @@
 {
-    "html_attributions": [],
-    "result": {
-        "address_components": [
-            {
-                "long_name": "81",
-                "short_name": "81",
-                "types": [
-                    "street_number"
-                ]
-            },
-            {
-                "long_name": "Anfu Road",
-                "short_name": "Anfu Rd",
-                "types": [
-                    "route"
-                ]
-            },
-            {
-                "long_name": "Xianghe Xian",
-                "short_name": "Xianghe Xian",
-                "types": [
-                    "sublocality_level_1",
-                    "sublocality",
-                    "political"
-                ]
-            },
-            {
-                "long_name": "Langfang Shi",
-                "short_name": "Langfang Shi",
-                "types": [
-                    "locality",
-                    "political"
-                ]
-            },
-            {
-                "long_name": "Hebei Sheng",
-                "short_name": "Hebei Sheng",
-                "types": [
-                    "administrative_area_level_1",
-                    "political"
-                ]
-            },
-            {
-                "long_name": "China",
-                "short_name": "CN",
-                "types": [
-                    "country",
-                    "political"
-                ]
-            },
-            {
-                "long_name": "065400",
-                "short_name": "065400",
-                "types": [
-                    "postal_code"
-                ]
-            }
-        ],
-        "adr_address": "<span class=\"street-address\">81 Anfu Rd</span>, <span class=\"extended-address\">Xianghe Xian</span>, <span class=\"locality\">Langfang Shi</span>, <span class=\"region\">Hebei Sheng</span>, <span class=\"country-name\">China</span>, <span class=\"postal-code\">065400</span>",
-        "business_status": "OPERATIONAL",
-        "formatted_address": "81 Anfu Rd, Xianghe Xian, Langfang Shi, Hebei Sheng, China, 065400",
-        "geometry": {
-            "location": {
-                "lat": 39.75431029999999,
-                "lng": 117.0186253
-            },
-            "viewport": {
-                "northeast": {
-                    "lat": 39.7556511302915,
-                    "lng": 117.0199165802915
-                },
-                "southwest": {
-                    "lat": 39.7529531697085,
-                    "lng": 117.0172186197085
-                }
-            }
-        },
-        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
-        "name": "Longda Sofa Material Sales Agency",
-        "place_id": "ChIJBfX3EW2F8TURsoFsxlQNd0Y",
-        "plus_code": {
-            "compound_code": "Q239+PF Xianghe County, Langfang, Hebei, China",
-            "global_code": "8PFVQ239+PF"
-        },
+  "html_attributions": [],
+  "result": {
+    "address_components": [
+      {
+        "long_name": "81",
+        "short_name": "81",
         "types": [
-            "furniture_store",
-            "home_goods_store",
-            "point_of_interest",
-            "store",
-            "establishment"
-        ],
-        "url": "https://maps.google.com/?cid=5077541762640937394",
-        "utc_offset": 480,
-        "vicinity": "81 Anfu Road, Xianghe County, Langfang"
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Anfu Road",
+        "short_name": "Anfu Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Xianghe Xian",
+        "short_name": "Xianghe Xian",
+        "types": [
+          "sublocality_level_1",
+          "sublocality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Langfang Shi",
+        "short_name": "Langfang Shi",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Hebei Sheng",
+        "short_name": "Hebei Sheng",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "China",
+        "short_name": "CN",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "065400",
+        "short_name": "065400",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "adr_address": "<span class=\"street-address\">81 Anfu Rd</span>, <span class=\"extended-address\">Xianghe Xian</span>, <span class=\"locality\">Langfang Shi</span>, <span class=\"region\">Hebei Sheng</span>, <span class=\"country-name\">China</span>, <span class=\"postal-code\">065400</span>",
+    "business_status": "OPERATIONAL",
+    "formatted_address": "81 Anfu Rd, Xianghe Xian, Langfang Shi, Hebei Sheng, China, 065400",
+    "geometry": {
+      "location": {
+        "lat": 39.75431029999999,
+        "lng": 117.0186253
+      },
+      "viewport": {
+        "northeast": {
+          "lat": 39.7556511302915,
+          "lng": 117.0199165802915
+        },
+        "southwest": {
+          "lat": 39.7529531697085,
+          "lng": 117.0172186197085
+        }
+      }
     },
-    "status": "OK"
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+    "name": "Longda Sofa Material Sales Agency",
+    "place_id": "ChIJBfX3EW2F8TURsoFsxlQNd0Y",
+    "plus_code": {
+      "compound_code": "Q239+PF Xianghe County, Langfang, Hebei, China",
+      "global_code": "8PFVQ239+PF"
+    },
+    "types": [
+      "furniture_store",
+      "home_goods_store",
+      "point_of_interest",
+      "store",
+      "establishment"
+    ],
+    "url": "https://maps.google.com/?cid=5077541762640937394",
+    "utc_offset": 480,
+    "vicinity": "81 Anfu Road, Xianghe County, Langfang"
+  },
+  "status": "OK"
 }

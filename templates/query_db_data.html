@@ -11,39 +11,44 @@
     <script src='/static/js/FileSaver.js'></script>
 </head>
 <style>
-    .progress{
+    .progress {
         height: 40px;
     }
-    #pro_bar{
-        display:none;
+
+    #pro_bar {
+        display: none;
         width: 300px;
-        height:50px;
+        height: 50px;
         z-index: 10;
         position: fixed;
         top: 20px;
-        right:300px
+        right: 300px
     }
-    #export_email{
+
+    #export_email {
         margin-top: 10px;
     }
-    .pagination{
-        margin-right: 24px;float: right
+
+    .pagination {
+        margin-right: 24px;
+        float: right
     }
 </style>
 <body style="overflow-y:scroll;">
 <div class="container-fluid" id="div_1">
-   <div style="height: 50px">
+    <div style="height: 50px">
         <form class="form-inline">
-        <a id="export_email" href="#" class="btn btn-lg btn-warning">Export Email</a>
-        <div id="pro_bar">
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0;">
+            <a id="export_email" href="#" class="btn btn-lg btn-warning">Export Email</a>
+            <div id="pro_bar">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                         style="width: 0;">
 
+                    </div>
                 </div>
-            </div>
 
-        </div>
-        <ul class="pagination">
+            </div>
+            <ul class="pagination">
                 <li>
                     <a href="#" onclick="change_page(1)"
                        aria-label="Previous">
@@ -85,8 +90,8 @@
 
 
             </ul>
-    </form>
-   </div>
+        </form>
+    </div>
     <table id="table_1" class="table table-bordered" style="margin-bottom: 0px">
         <thead>
         <th style="width: 40px"><input type="checkbox"></th>
@@ -111,22 +116,23 @@
     <table id="table_2" class="table table-bordered">
         <tbody id="table_content">
         {% for re in res %}
-            <tr id='{{ re.place_id | func_filter  }}'>
+            <tr id='{{ re.place_id | func_filter }}'>
                 <td>
                     <input class='data_td' type='checkbox'>
                 </td>
-                 <td><a  onclick="click_aa(this)" class='search_result_name'>{{ re.name | func_filter  }}</a></td>
-                <td><a href='' target="_blank">{{ re.website | func_filter  }}</a></td>
+                <td><a onclick="click_aa(this)" class='search_result_name'>{{ re.name | func_filter }}</a></td>
+                <td><a href='' target="_blank">{{ re.website | func_filter }}</a></td>
                 <td><span>{{ re.email | func_filter }}</span></td>
                 <td><span>{{ re.country | func_filter }}</span></td>
-                <td><span>{{ re.address | func_filter  }}</span></td>
+                <td><span>{{ re.address | func_filter }}</span></td>
                 <td><span>{{ re.phone | func_filter }}</span></td>
-                <td><a href='' target="_blank">{{ re.facebook | func_filter  }}</a></td>
-                <td><a href='' target="_blank">{{ re.youtube | func_filter  }}</a></td>
-                <td><a href='' target="_blank">{{ re.twitter | func_filter  }}</a></td>
-                <td><span>{{ re.search_word | func_filter  }}</span></td>
-                <td> <button class="btn btn-default search_detail_child" type="button">Query</button>
-                 <button class="btn btn-default delete_data_child" type="button">Delete</button>
+                <td><a href='' target="_blank">{{ re.facebook | func_filter }}</a></td>
+                <td><a href='' target="_blank">{{ re.youtube | func_filter }}</a></td>
+                <td><a href='' target="_blank">{{ re.twitter | func_filter }}</a></td>
+                <td><span>{{ re.search_word | func_filter }}</span></td>
+                <td>
+                    <button class="btn btn-default search_detail_child" type="button">Query</button>
+                    <button class="btn btn-default delete_data_child" type="button">Delete</button>
                 </td>
             </tr>
         {% endfor %}
@@ -134,21 +140,19 @@
     </table>
 </div>
 <script>
-       function change_page(page) {
-            var current_href = location.href;
-            if (current_href.indexOf("pagenum") != -1) {
-                location.href = current_href.split("pagenum=")[0] + "pagenum=" + String(page);
+    function change_page(page) {
+        var current_href = location.href;
+        if (current_href.indexOf("pagenum") != -1) {
+            location.href = current_href.split("pagenum=")[0] + "pagenum=" + String(page);
+        } else {
+            if (current_href.indexOf("?") != -1) {
+                location.href = current_href + "&pagenum=" + String(page);
+            } else {
+                location.href = current_href + "?pagenum=" + String(page)
             }
-            else{
-                if (current_href.indexOf("?") != -1)
-                {location.href = current_href + "&pagenum=" + String(page);}
-                else
-                {
-                    location.href = current_href + "?pagenum=" + String(page)
-                }
 
-            }
         }
+    }
 
 </script>
 <script>
@@ -179,81 +183,81 @@
     })
 
 
-     // 点击某一个具体的搜索详情
-     $('.search_detail_child').click(function () {
-            if (flag_search_all) {
-                alert('Please wait until the search task is finished！！！')
-            } else {
-                flag_search_all = true
-                var id_list = [];
-                var id = $(this).parent().parent().attr('id')
-                id_list.push(id)
-                // 将id_list 变为json串
-                var ids = JSON.stringify(id_list)
-                var index = 0;
-                $('.progress-bar').css('width', 0);
-                $('#pro_bar').css('display', 'block')
-                var t6 = window.setInterval(function () {
-                    if (index < 100) {
-                        index += 33;
-                        s = String(index) + '%'
-                        $('.progress-bar').css('width', s)
-                    }
-                    console.log(index)
-                }, 1000)
+    // 点击某一个具体的搜索详情
+    $('.search_detail_child').click(function () {
+        if (flag_search_all) {
+            alert('Please wait until the search task is finished！！！')
+        } else {
+            flag_search_all = true
+            var id_list = [];
+            var id = $(this).parent().parent().attr('id')
+            id_list.push(id)
+            // 将id_list 变为json串
+            var ids = JSON.stringify(id_list)
+            var index = 0;
+            $('.progress-bar').css('width', 0);
+            $('#pro_bar').css('display', 'block')
+            var t6 = window.setInterval(function () {
+                if (index < 100) {
+                    index += 33;
+                    s = String(index) + '%'
+                    $('.progress-bar').css('width', s)
+                }
+                console.log(index)
+            }, 1000)
 
-                $.ajax({
+            $.ajax({
 
-                    url: '/search_detail_by_ids/?place_ids=' + ids,
-                    type: 'get',
-                    success: function (ret) {
-                        window.clearInterval(t6);
-                        $('.progress-bar').css('width', '100%');
-                        setTimeout(function () {
-                            $('#pro_bar').css('display', 'none');
-                        }, 500)
-                        flag_search_all = false
+                url: '/search_detail_by_ids/?place_ids=' + ids,
+                type: 'get',
+                success: function (ret) {
+                    window.clearInterval(t6);
+                    $('.progress-bar').css('width', '100%');
+                    setTimeout(function () {
+                        $('#pro_bar').css('display', 'none');
+                    }, 500)
+                    flag_search_all = false
 
-                        // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
+                    // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
 
-                        if (ret.code == 1) {
-                            var data = ret.data;
-                            for (var i = 0; i < data.length; i++) {
-                                var place_id = data[i].pid
-                                var td_html = data[i].td_html
-                                if (td_html) {
-                                    // 根据place_id 找到之前的tr，然后替换为新的td_html
-                                    var str_id = '#' + place_id;
-                                    $(str_id).replaceWith(td_html)
-                                } else {
-                                    // td_html = ‘’ 说明详情页中包含中文，不要该结果！！
-                                    var str_id = '#' + place_id;
-                                    $(str_id).remove();
-                                }
+                    if (ret.code == 1) {
+                        var data = ret.data;
+                        for (var i = 0; i < data.length; i++) {
+                            var place_id = data[i].pid
+                            var td_html = data[i].td_html
+                            if (td_html) {
+                                // 根据place_id 找到之前的tr，然后替换为新的td_html
+                                var str_id = '#' + place_id;
+                                $(str_id).replaceWith(td_html)
+                            } else {
+                                // td_html = ‘’ 说明详情页中包含中文，不要该结果！！
+                                var str_id = '#' + place_id;
+                                $(str_id).remove();
                             }
-                            // click_a();
-                            // {#click_search_detail();#}
-                            click_delete();
-                        } else if (ret.code == -1) {
-                            alert(ret.msg);
-                        } else {
-                            var str_id = '#' + id;
-                            $(str_id).remove()
                         }
+                        // click_a();
+                        // {#click_search_detail();#}
+                        click_delete();
+                    } else if (ret.code == -1) {
+                        alert(ret.msg);
+                    } else {
+                        var str_id = '#' + id;
+                        $(str_id).remove()
                     }
-                })
-            }
-        });
+                }
+            })
+        }
+    });
 
     function click_delete() {
         $('.delete_data_child').click(function () {
             $(this).parent().parent().remove();
         });
     }
-     $('.delete_data_child').click(function () {
-            $(this).parent().parent().remove();
-        });
 
+    $('.delete_data_child').click(function () {
+        $(this).parent().parent().remove();
+    });
 
 
     // 搜索所有选中td 的详情信息！！

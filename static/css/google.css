@@ -6,7 +6,7 @@
 }
 
 .navbar {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
 
 }
 
@@ -17,9 +17,10 @@ html, body {
     padding: 0;
 }
 
-.dropdown-menu{
-    min-width:77px;
+.dropdown-menu {
+    min-width: 77px;
 }
+
 #top_content {
     top: 0;
     height: 552px;
@@ -29,8 +30,13 @@ html, body {
 }
 
 #search_div {
-    z-index: 0; position: absolute; top: 0; left: 715px;width:1000px
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 715px;
+    width: 1000px
 }
+
 #select_meter {
     width: 120px;
 }

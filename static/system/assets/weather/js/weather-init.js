@@ -6,21 +6,21 @@
             location: location,
             woeid: woeid,
             unit: 'f',
-            success: function (weather) { 
+            success: function (weather) {
                 html = '<div class="top">';
                 html += '<i class="wi wi-yahoo-' + weather.code + '"></i>';
-                html += '<div class="currently">' + weather.currently + '</div>'; 
-                html += '<div class="updates">' + weather.forecast[0].day + ', ' + weather.forecast[0].date+ '</div>'; 
+                html += '<div class="currently">' + weather.currently + '</div>';
+                html += '<div class="updates">' + weather.forecast[0].day + ', ' + weather.forecast[0].date + '</div>';
                 html += '</div>';
 
 
                 html += '<div class="middle">';
-                html += '<div class="city">' + weather.city + '  <span> '+ weather.region + '</span></div>';
-                html += '<div class="temp">' + weather.alt.temp + '<span>&deg;C</span> </div>'; 
+                html += '<div class="city">' + weather.city + '  <span> ' + weather.region + '</span></div>';
+                html += '<div class="temp">' + weather.alt.temp + '<span>&deg;C</span> </div>';
                 html += '</div>';
-                
+
                 html += '<div class="nextdays">';
-                
+
                 html += '<div class="days day2"><span class="d">' + weather.forecast[1].day + '</span> <span class="h">' + weather.forecast[1].alt.high + '&deg; </span> <span class="h">' + weather.forecast[1].alt.low + '&deg;  </div>';
                 html += '<div class="days day3"><span class="d">' + weather.forecast[2].day + '</span> <span class="h">' + weather.forecast[2].alt.high + '&deg; </span> <span class="h">' + weather.forecast[2].alt.low + '&deg;  </div>';
                 html += '<div class="days day4"><span class="d">' + weather.forecast[3].day + '</span> <span class="h">' + weather.forecast[3].alt.high + '&deg; </span> <span class="h">' + weather.forecast[3].alt.low + '&deg;  </div>';
@@ -71,7 +71,6 @@
     loadWeather('New York City', '');
 
 })(jQuery);
-
 
 
 (function ($) {

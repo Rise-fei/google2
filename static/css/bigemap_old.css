@@ -8,14 +8,16 @@ body {
 input[type=checkbox] {
     width: 20px;
 }
-.table>thead>tr>th {
+
+.table > thead > tr > th {
     vertical-align: middle;
 }
+
 td {
-    overflow:hidden;
+    overflow: hidden;
     /*white-space:nowrap;*/
-    width:100%;
-    text-overflow:ellipsis;
+    width: 100%;
+    text-overflow: ellipsis;
 }
 
 .navbar {
@@ -25,7 +27,7 @@ td {
     width: 100%;
 }
 
-.dropdown-menu li{
+.dropdown-menu li {
     z-index: 100;
 }
 
@@ -40,12 +42,12 @@ td {
 }
 
 
-
 table tr td:nth-child(1) {
-    width: 40px!important;
+    width: 40px !important;
 }
+
 table tr td:last-child {
-    width: 160px!important;
+    width: 160px !important;
 }
 
 .tool {

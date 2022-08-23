@@ -25,15 +25,15 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" target="_blank"  href="http://sstrade.net/">晟时科技</a>
+                <a class="navbar-brand" target="_blank" href="http://sstrade.net/">晟时科技</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a id="export_email" href="#">导出邮箱</a></li>
                     <li><a href="/query_from_db/" target="_blank">数据库查询</a></li>
-{#                    <li><a href="#">Link</a></li>#}
-{#                    <li><a href="#">Link</a></li>#}
+                    {#                    <li><a href="#">Link</a></li>#}
+                    {#                    <li><a href="#">Link</a></li>#}
                 </ul>
 
 
@@ -80,7 +80,8 @@
 
     {% csrf_token %}
     <div>
-        <table class="table table-bordered" style="z-index: 6;table-layout: fixed;position: fixed;background-color: white;">
+        <table class="table table-bordered"
+               style="z-index: 6;table-layout: fixed;position: fixed;background-color: white;">
             <thead>
             <th style="width: 40px"><input type="checkbox"></th>
             <th>名称</th>
@@ -214,7 +215,7 @@
             var lng = $(this).attr('lng');
             console.log('click aa')
             marker.setLatLng({lat: lat, lng: lng});
-           // {#map.setZoom(6);#}
+            // {#map.setZoom(6);#}
             map.panTo(marker.getLatLng())
             circle.setLatLng(marker.getLatLng())
         })
@@ -223,10 +224,9 @@
     // 点击某一个具体的搜索详情
     function click_search_detail() {
         $('.search_detail_child').click(function () {
-            if(flag_search_all){
+            if (flag_search_all) {
                 alert('请等待搜索任务执行完毕再操作！！！')
-            }
-            else {
+            } else {
                 flag_search_all = true
                 var id_list = [];
                 var id = $(this).parent().parent().attr('id')
@@ -254,22 +254,22 @@
                         $('.progress-bar').css('width', '100%');
                         setTimeout(function () {
                             $('#pro_bar').css('display', 'none');
-                        },500)
+                        }, 500)
                         flag_search_all = false
 
                         // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
 
-                             var data = ret.data;
-                            for (var i = 0; i < data.length; i++) {
-                                var place_id = data[i].pid
-                                var td_html = data[i].td_html
-                                // 根据place_id 找到之前的tr，然后替换为新的td_html
-                                var str_id = '#' + place_id;
-                                $(str_id).replaceWith(td_html)
-                            }
-                           click_a();
-                           // {#click_search_detail();#}
-                           click_delete();
+                        var data = ret.data;
+                        for (var i = 0; i < data.length; i++) {
+                            var place_id = data[i].pid
+                            var td_html = data[i].td_html
+                            // 根据place_id 找到之前的tr，然后替换为新的td_html
+                            var str_id = '#' + place_id;
+                            $(str_id).replaceWith(td_html)
+                        }
+                        click_a();
+                        // {#click_search_detail();#}
+                        click_delete();
 
 
                     }
@@ -420,9 +420,9 @@
                                     success: function (ret) {
                                         window.clearInterval(t4);
                                         $('.progress-bar').css('width', '100%');
-                                          setTimeout(function () {
-                                                $('#pro_bar').css('display', 'none');
-                                            }, 0.5);
+                                        setTimeout(function () {
+                                            $('#pro_bar').css('display', 'none');
+                                        }, 0.5);
 
                                         if (ret.status == 1) {
                                             get_search_list(ret.data_final_html)
@@ -439,13 +439,13 @@
                         var flag2 = confirm('未查询到附近相关结果,是否扩大搜索范围？')
                         if (flag2) {
                             ttt = window.setInterval(function () {
-                                    if (index < 100) {
-                                        index += 5;
-                                        s = String(index) + '%'
-                                        $('.progress-bar').css('width', s)
-                                    }
-                                    console.log(index)
-                                }, 1000)
+                                if (index < 100) {
+                                    index += 5;
+                                    s = String(index) + '%'
+                                    $('.progress-bar').css('width', s)
+                                }
+                                console.log(index)
+                            }, 1000)
                             $.ajax({
                                 url: '/extra_search/',
                                 type: 'post',
@@ -459,9 +459,9 @@
                                 success: function (ret) {
                                     window.clearInterval(ttt);
                                     $('.progress-bar').css('width', '100%');
-                                      setTimeout(function () {
-                                            $('#pro_bar').css('display', 'none');
-                                        }, 0.5);
+                                    setTimeout(function () {
+                                        $('#pro_bar').css('display', 'none');
+                                    }, 0.5);
 
 
                                     if (ret.status == 1) {
@@ -479,12 +479,10 @@
         });
 
         // 搜索所有选中td 的详情信息！！
-        $('#search_detail').click(function ()
-        {
-            if(flag_search_all){
+        $('#search_detail').click(function () {
+            if (flag_search_all) {
                 alert('请等待搜索执行完毕后操作！！！')
-            }
-            else {
+            } else {
                 flag_search_all = true
                 var li = $("input[class='data_td']:checked")
                 var li_len = li.length;
@@ -493,30 +491,29 @@
                 $('.progress-bar').css('width', 0);
                 $('#pro_bar').css('display', 'block')
                 t2 = window.setInterval(function () {
-                        if (index_list.length < li_len) {
-                            //   i    /  l         index/i = 100/l    index = 100 * i / l
-                            //  index / 100
-                            index = 100 * index_list.length / li_len
-                            if(index>100)
-                                index=100;
-                            s = String(index) + '%'
-                            $('.progress-bar').css('width', s)
-                            console.log('**********' + index + '*********' + index_list)
-                        }
-                        else {
-                            flag_search_all = false
-                             $('#pro_bar').css('display', 'none');
-                             window.clearInterval(t2)
-                        }
-                        console.log('---------' + index)
-                    }, 1000)
+                    if (index_list.length < li_len) {
+                        //   i    /  l         index/i = 100/l    index = 100 * i / l
+                        //  index / 100
+                        index = 100 * index_list.length / li_len
+                        if (index > 100)
+                            index = 100;
+                        s = String(index) + '%'
+                        $('.progress-bar').css('width', s)
+                        console.log('**********' + index + '*********' + index_list)
+                    } else {
+                        flag_search_all = false
+                        $('#pro_bar').css('display', 'none');
+                        window.clearInterval(t2)
+                    }
+                    console.log('---------' + index)
+                }, 1000)
 
                 for (var i = 0; i < li.length; i++) {
                     var id_list = [];
                     // 将每一个勾选状态的 placeid 放到一个列表中
                     var id = $(li[i]).parent().parent().attr('id')
                     id_list.push(id)
-                       // 将id_list 变为json串
+                    // 将id_list 变为json串
                     var ids = JSON.stringify(id_list)
                     {#var li_len = li.length; // 1个3 秒   一共  3 * l * x = 100  x = 100/5/l = 20/l    100/l#}
                     $.ajax({
@@ -525,22 +522,22 @@
                         success: function (ret) {
                             index_list.push(1)
                             //if(ret.code==1){
-                                // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
-                                var data = ret.data;
-                                for (var i = 0; i < data.length; i++) {
-                                    var place_id = data[i].pid
-                                    var td_html = data[i].td_html
-                                    // 根据place_id 找到之前的tr，然后替换为新的td_html
-                                    var str_id = '#' + place_id;
-                                    $(str_id).replaceWith(td_html)
-                                }
-                                // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
-                                click_a();
-                                click_delete();
-                           // }
-                           // else {
-                           //     alert('有数据未能成功搜索！')
-                           // }
+                            // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
+                            var data = ret.data;
+                            for (var i = 0; i < data.length; i++) {
+                                var place_id = data[i].pid
+                                var td_html = data[i].td_html
+                                // 根据place_id 找到之前的tr，然后替换为新的td_html
+                                var str_id = '#' + place_id;
+                                $(str_id).replaceWith(td_html)
+                            }
+                            // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
+                            click_a();
+                            click_delete();
+                            // }
+                            // else {
+                            //     alert('有数据未能成功搜索！')
+                            // }
                         }
                     })
                 }
@@ -569,11 +566,11 @@
         $('#export_email').click(function () {
             var li = $("input[class='data_td']:checked")
             var final_email_str = "";
-            for (var i=0;i<li.length;i++){
+            for (var i = 0; i < li.length; i++) {
                 var email_str = li.eq(i).parent().next().next().next().text()
-                if(email_str){
+                if (email_str) {
                     var word = li.eq(i).parent().siblings().eq(-2).text();
-                    var final_str = word + '|' + email_str.replace(/;/g,'\n'+ word +'|') + '\n'
+                    var final_str = word + '|' + email_str.replace(/;/g, '\n' + word + '|') + '\n'
                     final_email_str += final_str;
                 }
             }
@@ -583,10 +580,10 @@
             a.download = 'email.csv';
         })
     })
-    $(function() {
-        $(".exportToExcel").click(function(e){
+    $(function () {
+        $(".exportToExcel").click(function (e) {
             var table = $(this).prev('.table2excel');
-            if(table && table.length){
+            if (table && table.length) {
                 var preserveColors = (table.hasClass('table2excel_with_colors') ? true : false);
                 $(table).table2excel({
                     exclude: ".noExl",

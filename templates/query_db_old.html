@@ -272,34 +272,33 @@
             var word = $('#query_word').val();
             var country = $('#select_country').val();
             $('#query_btn').text('Querying...');
-            $('#query_btn').prop('disabled',true);
+            $('#query_btn').prop('disabled', true);
             setTimeout(function () {
                 alert("Querying database, please wait patiently.......")
                 $.ajax({
-                url: '/query_from_db/',
-                type: 'post',
-                async:false,
-                data: {
-                    'word': word,
-                    'country': country,
-                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
-                },
-                success: function (ret) {
-                    if (ret.code == 1) {
-                        alert(ret.msg);
-                        {#console.log(ret.final_html)#}
-                        $('#table_content').append(ret.data);
-                        click_delete();
-                        click_search_detail();
-                    } else {
-                        alert(ret.msg)
+                    url: '/query_from_db/',
+                    type: 'post',
+                    async: false,
+                    data: {
+                        'word': word,
+                        'country': country,
+                        'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+                    },
+                    success: function (ret) {
+                        if (ret.code == 1) {
+                            alert(ret.msg);
+                            {#console.log(ret.final_html)#}
+                            $('#table_content').append(ret.data);
+                            click_delete();
+                            click_search_detail();
+                        } else {
+                            alert(ret.msg)
+                        }
                     }
-                }
-            })
-                $('#query_btn').prop('disabled',false)
+                })
+                $('#query_btn').prop('disabled', false)
                 $('#query_btn').text('Query')
-            },500)
-
+            }, 500)
 
 
         })

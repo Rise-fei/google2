@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('spider', '0002_remove_custloginrecord_session_id'),
     ]

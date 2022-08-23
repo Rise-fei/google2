@@ -1,297 +1,331 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-<meta http-equiv="Content-Script-Type" content="text/javascript" /> 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="robots" content="index, follow" />
-<meta name="keywords" content="" />
-<meta name="title" content="" />
-<meta name="description" content="" />
-<title>Bay Area Home Furniture - House Of Values</title>
-<link rel="shortcut icon" href="images/fav.png" />
-<!-- ////////////////////////////////// -->
-<!-- //      Start Stylesheets       // -->
-<!-- ////////////////////////////////// -->
-<link href="styles/style.css" rel="stylesheet" type="text/css" />
-<link href="styles/noscript.css" rel="stylesheet" type="text/css" id="noscript" media="screen,all"  />
-<!-- ////////////////////////////////// -->
-<!-- //      Javascript Files        // -->
-<!-- ////////////////////////////////// -->
-<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="robots" content="index, follow"/>
+    <meta name="keywords" content=""/>
+    <meta name="title" content=""/>
+    <meta name="description" content=""/>
+    <title>Bay Area Home Furniture - House Of Values</title>
+    <link rel="shortcut icon" href="images/fav.png"/>
+    <!-- ////////////////////////////////// -->
+    <!-- //      Start Stylesheets       // -->
+    <!-- ////////////////////////////////// -->
+    <link href="styles/style.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/noscript.css" rel="stylesheet" type="text/css" id="noscript" media="screen,all"/>
+    <!-- ////////////////////////////////// -->
+    <!-- //      Javascript Files        // -->
+    <!-- ////////////////////////////////// -->
+    <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 
-<script type="text/javascript" src="js/cufon-yui.js"></script>
-<script type="text/javascript" src="js/Century_Gothic_400-Century_Gothic_700-Century_Gothic_italic_400-Century_Gothic_italic_700.font.js"></script>
-<script type="text/javascript">
-	 Cufon.replace('h1') ('h2') ('h3') ('h4') ('h5') ('h6');
-</script>
+    <script type="text/javascript" src="js/cufon-yui.js"></script>
+    <script type="text/javascript"
+            src="js/Century_Gothic_400-Century_Gothic_700-Century_Gothic_italic_400-Century_Gothic_italic_700.font.js"></script>
+    <script type="text/javascript">
+        Cufon.replace('h1')('h2')('h3')('h4')('h5')('h6');
+    </script>
 
-<script type="text/javascript" src="js/dropdown.js"></script>
-<script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
-<script type="text/javascript">
-jQuery('#slider').cycle({
+    <script type="text/javascript" src="js/dropdown.js"></script>
+    <script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+        jQuery('#slider').cycle({
             timeout: 6000,  // milliseconds between slide transitions (0 to disable auto advance)
-            fx:     'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...            
-            prev:   '#slideprev', // selector for element to use as click trigger for next slide  
-			next:   '#slidenext', // selector for element to use as click trigger for previous slide
-            pause:   true,	  // true to enable "pause on hover"
-			cleartypeNoBg: true, // set to true to disable extra cleartype fixing (leave false to force background color setting on slides)
+            fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+            prev: '#slideprev', // selector for element to use as click trigger for next slide
+            next: '#slidenext', // selector for element to use as click trigger for previous slide
+            pause: true,	  // true to enable "pause on hover"
+            cleartypeNoBg: true, // set to true to disable extra cleartype fixing (leave false to force background color setting on slides)
             pauseOnPagerHover: 0 // true to pause when hovering over pager link
-});
+        });
 
-</script>
+    </script>
 </head>
 <body>
 <div id="outer-wrapper">
 
-	<div id="top-wrapper">
-		<div class="container">
-        	<div id="top">
-		
-			<!--<div id="logo">
-				<a href="index.html"><img src="images/logo.gif" alt="" /></a>
-			</div>
-			<div id="mainmenu">
-                <ul class="sn">
-                    <li><a href="#"><img src="images/icon/i-facebook.png" alt=""  /></a></li>
-                    <li><a href="#"><img src="images/icon/i-last.fm.png" alt=""  /></a></li>
-                    <li><a href="#"><img src="images/icon/i-myspace.png" alt=""  /></a></li>
-                    <li><a href="#"><img src="images/icon/i-twitter.png" alt=""  /></a></li>
-                    <li><a href="#"><img src="images/icon/i-youtube.png" alt=""  /></a></li>
-                </ul>
+    <div id="top-wrapper">
+        <div class="container">
+            <div id="top">
 
-				<ul id="menu">
-					<li class="current"><a href="index.html">Home</a></li>
-					<li><a href="about.html">About Us</a>
-						<ul>
-							<li><a href="elements.html">Elements</a></li>
-							<li><a href="column-layouts.html">Column Layouts</a></li>
-							<li><a href="rooms-detail.html">Rooms Details</a></li>
-                            <li><a href="single.html">Blog Details</a></li>
-						</ul>
-                    </li>
-					<li><a href="service.html">Services</a></li>
-					<li><a href="blog.html">Blog</a></li>
-                    <li><a href="rooms.html">Rooms</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-				-->
-				<div class="logo_sell"> <img src="images/logo.png" width="395" height="93" alt="House of Values - Bay Area Home Furniture" />
-         
-		 
-		  <ul id="menu">
-            <li><a href="home_furniture.html">Home Furniture </a>
-              <ul>
-                <li><a href="bedroom.html">Bedroom</a></li> <li><a href="dining.html">Dining</a></li>
-                <li><a href="living.html">Living</a></li>
-                <li><a href="childrens.html">Children's</a></li>
-                <li><a href="accessories.html">Accessories</a></li>
-                <li><a href="home-office.html">Home Office</a></li>
-                <li><a href="outdoor.html">Outdoor</a></li>
-                <li><a href="made-in-usa.html">Made in USA</a></li>
-              </ul>
-            </li>
-            <li><a href="our_story.html">Our Story</a></li>
-            <li><a href="delivery.html">Delivery </a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="index.html"> Home</a></li>
-              </ul>
+                <!--<div id="logo">
+                    <a href="index.html"><img src="images/logo.gif" alt="" /></a>
+                </div>
+                <div id="mainmenu">
+                    <ul class="sn">
+                        <li><a href="#"><img src="images/icon/i-facebook.png" alt=""  /></a></li>
+                        <li><a href="#"><img src="images/icon/i-last.fm.png" alt=""  /></a></li>
+                        <li><a href="#"><img src="images/icon/i-myspace.png" alt=""  /></a></li>
+                        <li><a href="#"><img src="images/icon/i-twitter.png" alt=""  /></a></li>
+                        <li><a href="#"><img src="images/icon/i-youtube.png" alt=""  /></a></li>
+                    </ul>
+
+                    <ul id="menu">
+                        <li class="current"><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a>
+                            <ul>
+                                <li><a href="elements.html">Elements</a></li>
+                                <li><a href="column-layouts.html">Column Layouts</a></li>
+                                <li><a href="rooms-detail.html">Rooms Details</a></li>
+                                <li><a href="single.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="service.html">Services</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    -->
+                <div class="logo_sell"><img src="images/logo.png" width="395" height="93"
+                                            alt="House of Values - Bay Area Home Furniture"/>
+
+
+                    <ul id="menu">
+                        <li><a href="home_furniture.html">Home Furniture </a>
+                            <ul>
+                                <li><a href="bedroom.html">Bedroom</a></li>
+                                <li><a href="dining.html">Dining</a></li>
+                                <li><a href="living.html">Living</a></li>
+                                <li><a href="childrens.html">Children's</a></li>
+                                <li><a href="accessories.html">Accessories</a></li>
+                                <li><a href="home-office.html">Home Office</a></li>
+                                <li><a href="outdoor.html">Outdoor</a></li>
+                                <li><a href="made-in-usa.html">Made in USA</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="our_story.html">Our Story</a></li>
+                        <li><a href="delivery.html">Delivery </a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html"> Home</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="clear"></div>
+            </div><!-- #mainmenu -->
         </div>
-				
-				
-				
-				<div class="clear"></div>
-			</div><!-- #mainmenu -->
-            </div>
-           
-			<!--<div id="navigation">
-            	<ul>
-                	<li><a href="rooms.html">Accomodation</a></li>
-                    <li><a href="contact.html">Reservation</a></li>
-                    <li><a href="service.html">Facilities</a></li>
-                </ul>
-				<form action="#" method="post">
-                    <div id="loginform">
-                    <input type="text" class="inputbox" value="User ID"  onblur="if(this.value=='') this.value='User ID';" onfocus="if(this.value=='User ID') this.value='';" /><input type="text" class="inputbox" value="Password"  onblur="if(this.value=='') this.value='Password';" onfocus="if(this.value=='Password') this.value='';" /><input type="submit" value="Login" class="button" />
-                    </div>
-                </form>
 
-                <ul>
-                	<li><a href="#">Register Now!</a></li>     
-                    <li><a href="#">Forggoten Your Password?</a></li>
-                </ul>
-            </div>-->
-		</div><!-- .container -->
-	</div><!-- #top-wrapper -->
-    
- <div id="slider-container">
-        <ul id="slider">
-            <li><img src="images/home1.1.1.jpg" alt="" /></li>
-            <li><img src="images/home-4.jpg" alt="" /></li>
-      <li><img src="images/home-14.jpg" alt="" /></li>
-                        <li><img src="images/home-7.jpg" alt="" /></li>
-        </ul>
-        <div class="slide-nav-container">
+        <!--<div id="navigation">
+            <ul>
+                <li><a href="rooms.html">Accomodation</a></li>
+                <li><a href="contact.html">Reservation</a></li>
+                <li><a href="service.html">Facilities</a></li>
+            </ul>
+            <form action="#" method="post">
+                <div id="loginform">
+                <input type="text" class="inputbox" value="User ID"  onblur="if(this.value=='') this.value='User ID';" onfocus="if(this.value=='User ID') this.value='';" /><input type="text" class="inputbox" value="Password"  onblur="if(this.value=='') this.value='Password';" onfocus="if(this.value=='Password') this.value='';" /><input type="submit" value="Login" class="button" />
+                </div>
+            </form>
+
+            <ul>
+                <li><a href="#">Register Now!</a></li>
+                <li><a href="#">Forggoten Your Password?</a></li>
+            </ul>
+        </div>-->
+    </div><!-- .container -->
+</div><!-- #top-wrapper -->
+
+<div id="slider-container">
+    <ul id="slider">
+        <li><img src="images/home1.1.1.jpg" alt=""/></li>
+        <li><img src="images/home-4.jpg" alt=""/></li>
+        <li><img src="images/home-14.jpg" alt=""/></li>
+        <li><img src="images/home-7.jpg" alt=""/></li>
+    </ul>
+    <div class="slide-nav-container">
         <div id="slide-nav">
             <div id="slideprev"></div>
             <div id="slidenext"></div>
-        </div> 
         </div>
-    </div><!-- #slider-container -->
-    
-    
-  
-	<div class="clear"></div>
-    
-	<div id="content-wrapper">
-		<div class="container">
-        	<div id="content-container">
+    </div>
+</div><!-- #slider-container -->
+
+
+<div class="clear"></div>
+
+<div id="content-wrapper">
+    <div class="container">
+        <div id="content-container">
             <div id="frame-content-t">
-              <div id="frame-content-b">
-   				  <div class="center2">
-                   <Div class="tomthamb_image"><a href="demo/living.html"><a href="living.html"><img src="images/thm1.png" alt="" /></a><a href="bedroom.html"><img src="images/thm2.png" alt="" /></a> 
-						     <a href="dining.html"><img src="images/thm3.png" alt="" class="last_image" /></a> 
-						                
-                 </Div>
-				 
-				 <div class="botbig_image">
-				<a href="childrens.html"> <img  src="images/banner_new.png" width="955" height="70" alt="" /></a>
-				 </div> 
-				 
-				 <div class="body_titale">
-				 Enjoy the Best Home Furniture For Less
-				 </div>
-				    <div class="clear"></div>
-				  </div><!-- .center -->
-                  
-                  <div class="clear"></div>
-                  <div class="line"></div><br />
-                  <div class="clear"></div>
-                   
-                   <div class="center">
-                  <div class="three-column-r">
-                  	<div class="three-column-t">
-                    	<div class="three-column-b">
-                        	<div id="side-left">
-                                <ul class="sidebar">
-                                    <li class="widget-container textwidget home">
-                                        <h2 class="widget-title">Why Choose Us</h2>
-                                      <p>         *Access to over 150 name brands from home furnishings to home accessories with prices 50% below retail</p>
-                                    </li>
-                                    <li class="widget-container textwidget home">
-                                      <p>*Design consultants available to help visualize and create your personal space </p>
-                                    </li>
-                                    <li class="widget-container textwidget home">
-                                      <p>*White glove delivery service and installation at no charge in the greater peninsula, including: </p>
-                                      <ul>
-                                        <li> Santa Clara County</li>
-  <li>San Mateo County</li>
-  <li>Alameda County</li>
-  <li>Contra Costa County</li>
-  <li>San Francisco County</li>
+                <div id="frame-content-b">
+                    <div class="center2">
+                        <Div class="tomthamb_image"><a href="demo/living.html"><a href="living.html"><img
+                                src="images/thm1.png" alt=""/></a><a href="bedroom.html"><img src="images/thm2.png"
+                                                                                              alt=""/></a>
+                            <a href="dining.html"><img src="images/thm3.png" alt="" class="last_image"/></a>
+
+                        </Div>
+
+                        <div class="botbig_image">
+                            <a href="childrens.html"> <img src="images/banner_new.png" width="955" height="70" alt=""/></a>
+                        </div>
+
+                        <div class="body_titale">
+                            Enjoy the Best Home Furniture For Less
+                        </div>
+                        <div class="clear"></div>
+                    </div><!-- .center -->
+
+                    <div class="clear"></div>
+                    <div class="line"></div>
+                    <br/>
+                    <div class="clear"></div>
+
+                    <div class="center">
+                        <div class="three-column-r">
+                            <div class="three-column-t">
+                                <div class="three-column-b">
+                                    <div id="side-left">
+                                        <ul class="sidebar">
+                                            <li class="widget-container textwidget home">
+                                                <h2 class="widget-title">Why Choose Us</h2>
+                                                <p> *Access to over 150 name brands from home furnishings to home
+                                                    accessories with prices 50% below retail</p>
+                                            </li>
+                                            <li class="widget-container textwidget home">
+                                                <p>*Design consultants available to help visualize and create your
+                                                    personal space </p>
+                                            </li>
+                                            <li class="widget-container textwidget home">
+                                                <p>*White glove delivery service and installation at no charge in the
+                                                    greater peninsula, including: </p>
+                                                <ul>
+                                                    <li> Santa Clara County</li>
+                                                    <li>San Mateo County</li>
+                                                    <li>Alameda County</li>
+                                                    <li>Contra Costa County</li>
+                                                    <li>San Francisco County</li>
+                                                </ul>
+                                            </li>
                                         </ul>
-                                    </li>
-                                </ul>
-								
-							              
-                            </div><!-- #side-left -->
-                            
-                            <div id="main-content">
-                            <h2>Welcome to House of Values</h2>
-<img src="images/imnew1.png" alt="" class="alignleft"/><p>Established in 1949 by Albert âJuniorâ Wiget, House of Values prides itself on supplying the highest quality of name brand furniture at a discounted price. With a wide array of styles from Classic to Contemporary, our three separate showrooms provide House of Values space to showcase products of each vendor. Our experienced staff members are there to assist you in your search through our hundreds of catalogs, fabric swatches and finish samples to select any addition for your home from full dining room sets to lighting and floor coverings.  Independent consumers and designers in the peninsula are welcome to bring in floor plans and photos of your space and our design consultants will help create a room reflective of your personal style or point you in the direction of that one missing piece!  </p>
-<p><strong>Store Hours<br />
-  </strong>Tuesday-Saturday 9:30am-5:30pm - 
-  Closed Sundays  and Mondays<br />
-  <strong><br />
-  
-  <strong>HOLIDAY HOURS</strong>
-  <br />
-  CLOSED THANKSGIVING<br />
-CLOSED CHRISTMAS<br />
-CLOSED NEW YEARS DAYS<br /><br />
-
-CLOSED AT 12:30PM CHRISTMAS EVE<br />
-CLOSED AT 12:30PM NEW YEARS EVE<br />
-<br />
-  </strong><strong>Contact Us<br />
-    </strong>Phone: (650)  349-3414<br />
-  Fax: (650)  349-3076<br />
-  Email: <a href="mailto:info@houseofvalues.com">info@houseofvalues.com</a></p>
-</div><!-- #main-content -->
-                            
-                            <div id="side-right">
-                                <ul class="sidebar">
-                                    <li class="widget-container newswidget">
-                                        <h2 class="widget-title">See what people are saying about us</h2>
-                                        
-                                        	
-					<a href="http://www.yelp.com/biz/house-of-values-san-mateo">
-  <img alt="House of Values" height="54" src="http://dyn.yelpcdn.com/extimg/fsc/9UzDnk-KWMo7AqcwzGLcKA.png" width="125"> </a>
 
 
-                                
-                                        <ul>
-                                            <li><br />
-                                            "If I need to buy any other furniture, I will definitely without question go with House of Values." </li>
-                                            <span class="smalldate">Jennifer M., South San Francisco</span>
-                                            <li>&quot;If you want brand name furniture of any type (dining room,  bedroom, upholstered, etc). they have it all. This place rocks when it comes to  furniture value. &quot; </li><span class="smalldate">Gomez B., Los Altos</span>
-                                            <li>&quot;Wow!&quot; in every sense of the word! &nbsp;Wow, they have a  great selection of manufacturers. &nbsp;Wow, you cannot beat their  prices!&quot; .</li><span class="smalldate">Sarah H, San Mateo</span>
+                                    </div><!-- #side-left -->
+
+                                    <div id="main-content">
+                                        <h2>Welcome to House of Values</h2>
+                                        <img src="images/imnew1.png" alt="" class="alignleft"/>
+                                        <p>Established in 1949 by Albert âJuniorâ Wiget, House of Values prides
+                                            itself on supplying the highest quality of name brand furniture at a
+                                            discounted price. With a wide array of styles from Classic to Contemporary,
+                                            our three separate showrooms provide House of Values space to showcase
+                                            products of each vendor. Our experienced staff members are there to assist
+                                            you in your search through our hundreds of catalogs, fabric swatches and
+                                            finish samples to select any addition for your home from full dining room
+                                            sets to lighting and floor coverings. Independent consumers and designers in
+                                            the peninsula are welcome to bring in floor plans and photos of your space
+                                            and our design consultants will help create a room reflective of your
+                                            personal style or point you in the direction of that one missing piece! </p>
+                                        <p><strong>Store Hours<br/>
+                                        </strong>Tuesday-Saturday 9:30am-5:30pm -
+                                            Closed Sundays and Mondays<br/>
+                                            <strong><br/>
+
+                                                <strong>HOLIDAY HOURS</strong>
+                                                <br/>
+                                                CLOSED THANKSGIVING<br/>
+                                                CLOSED CHRISTMAS<br/>
+                                                CLOSED NEW YEARS DAYS<br/><br/>
+
+                                                CLOSED AT 12:30PM CHRISTMAS EVE<br/>
+                                                CLOSED AT 12:30PM NEW YEARS EVE<br/>
+                                                <br/>
+                                            </strong><strong>Contact Us<br/>
+                                            </strong>Phone: (650) 349-3414<br/>
+                                            Fax: (650) 349-3076<br/>
+                                            Email: <a href="mailto:info@houseofvalues.com">info@houseofvalues.com</a>
+                                        </p>
+                                    </div><!-- #main-content -->
+
+                                    <div id="side-right">
+                                        <ul class="sidebar">
+                                            <li class="widget-container newswidget">
+                                                <h2 class="widget-title">See what people are saying about us</h2>
+
+
+                                                <a href="http://www.yelp.com/biz/house-of-values-san-mateo">
+                                                    <img alt="House of Values" height="54"
+                                                         src="http://dyn.yelpcdn.com/extimg/fsc/9UzDnk-KWMo7AqcwzGLcKA.png"
+                                                         width="125"> </a>
+
+
+                                                <ul>
+                                                    <li><br/>
+                                                        "If I need to buy any other furniture, I will definitely without
+                                                        question go with House of Values."
+                                                    </li>
+                                                    <span class="smalldate">Jennifer M., South San Francisco</span>
+                                                    <li>&quot;If you want brand name furniture of any type (dining room,
+                                                        bedroom, upholstered, etc). they have it all. This place rocks
+                                                        when it comes to furniture value. &quot;
+                                                    </li>
+                                                    <span class="smalldate">Gomez B., Los Altos</span>
+                                                    <li>&quot;Wow!&quot; in every sense of the word! &nbsp;Wow, they
+                                                        have a great selection of manufacturers. &nbsp;Wow, you cannot
+                                                        beat their prices!&quot; .
+                                                    </li>
+                                                    <span class="smalldate">Sarah H, San Mateo</span>
+                                                </ul>
+                                            </li>
                                         </ul>
-                                    </li>
-                                </ul>   
-                        </div><!-- #side-right -->
-                            <div class="clear"></div>
-                        </div><!-- .three-column-b -->
-                    </div><!-- .three-column-t -->
-                  </div><!-- .three-column-r -->
-                  </div><!-- .center -->
-                
-                <div class="clear"></div>
+                                    </div><!-- #side-right -->
+                                    <div class="clear"></div>
+                                </div><!-- .three-column-b -->
+                            </div><!-- .three-column-t -->
+                        </div><!-- .three-column-r -->
+                    </div><!-- .center -->
+
+                    <div class="clear"></div>
                 </div><!-- #frame-content-b -->
             </div><!-- #frame-content-t -->
-            </div><!-- #content-container -->
-		</div><!-- .container -->
-	</div><!-- #content-wrapper -->
+        </div><!-- #content-container -->
+    </div><!-- .container -->
+</div><!-- #content-wrapper -->
 
-	<div id="footer-wrapper">
-		<div class="container">
-        	<div id="footer">
-                <ul id="footer-menu">
-                   <li class="current"><a href="home_furniture.html">Home Furniture </a></li>
-					<li><a href="our_story.html">Our Story</a>
-						<!--<ul>
-							<li><a href="elements.html">Elements</a></li>
-							<li><a href="column-layouts.html">Column Layouts</a></li>
-							<li><a href="rooms-detail.html">Rooms Details</a></li>
-                            <li><a href="single.html">Blog Details</a></li>
-						</ul>-->
-                    </li>
-					<li><a href="delivery.html">Delivery </a></li>
-					<li><a href="faq.html">FAQ</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="index.html"> Home</a></li>
-					    
-                    
-                </ul>
-                <div id="copyright">
-				Copyright &copy;2012 House of Values<br />
-               Web Site Design By <a href="http://bayarea-websolutions.com">Bay Area Web Solutions</a> </div>
-            </div><!-- #footer -->
-		</div><!-- .container -->
-	</div><!-- #footer-wrapper -->
+<div id="footer-wrapper">
+    <div class="container">
+        <div id="footer">
+            <ul id="footer-menu">
+                <li class="current"><a href="home_furniture.html">Home Furniture </a></li>
+                <li><a href="our_story.html">Our Story</a>
+                    <!--<ul>
+                        <li><a href="elements.html">Elements</a></li>
+                        <li><a href="column-layouts.html">Column Layouts</a></li>
+                        <li><a href="rooms-detail.html">Rooms Details</a></li>
+                        <li><a href="single.html">Blog Details</a></li>
+                    </ul>-->
+                </li>
+                <li><a href="delivery.html">Delivery </a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html"> Home</a></li>
+
+
+            </ul>
+            <div id="copyright">
+                Copyright &copy;2012 House of Values<br/>
+                Web Site Design By <a href="http://bayarea-websolutions.com">Bay Area Web Solutions</a></div>
+        </div><!-- #footer -->
+    </div><!-- .container -->
+</div><!-- #footer-wrapper -->
 <script type="text/javascript"> Cufon.now(); </script> <!-- to fix cufon problems in IE browser -->
 <script type="text/javascript">jQuery('#noscript').remove();</script><!-- if javascript disable -->
 <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-35942732-1']);
-  _gaq.push(['_trackPageview']);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35942732-1']);
+    _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
 
 </script>
 </body>

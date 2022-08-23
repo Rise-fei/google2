@@ -10,19 +10,20 @@
     <script src='/static/js/FileSaver.js'></script>
 </head>
 <style>
-    #div_1{
+    #div_1 {
         top: 10px;
     }
-    #query_word{
+
+    #query_word {
         width: 250px;
     }
 </style>
 <body style="overflow-y:scroll;">
 <div class="container col-md-6 col-md-offset-3" id="div_1">
-    <form class="form-inline " >
+    <form class="form-inline ">
         {% csrf_token %}
         <div class="form-group">
-            <label for="query_word" id="title">Query  records：</label>
+            <label for="query_word" id="title">Query records：</label>
             <input type="text" class="form-control" placeholder="Please enter the keyword to query" id="query_word">
             <select class="form-control" id="select_country">
                 <option value="all">All data</option>
@@ -37,7 +38,7 @@
                 {% endfor %}
 
             </select>
-        <button id="query_btn" type="button" class="btn btn-primary">Query</button>
+            <button id="query_btn" type="button" class="btn btn-primary">Query</button>
         </div>
 
     </form>
@@ -47,12 +48,11 @@
     $(function () {
         $('#query_btn').click(function () {
             var word = $('#query_word').val();
-            if (!word){
+            if (!word) {
                 alert("Please input keyword！")
-            }
-            else{
+            } else {
                 var country = $('#select_country').val();
-                url = '/query_db_data/?word='+ word +'&country='+country
+                url = '/query_db_data/?word=' + word + '&country=' + country
                 window.open(url)
             }
 

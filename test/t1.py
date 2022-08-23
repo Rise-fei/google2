@@ -37,7 +37,6 @@
 # search_detail('ChIJBfX3EW2F8TURsoFsxlQNd0Y','sofa')
 
 
-
 #
 # import re,json
 # reg = re.compile(u'[\u4e00-\u9fa5]')  #检查中文
@@ -112,16 +111,21 @@
 # print(dic)
 #
 import threading
+import time
 from threading import Thread
-import  time
+
+
 def test():
     while 1:
         time.sleep(3)
         print(1)
+
+
 def test2():
     while 1:
         time.sleep(3)
         print(2)
+
 
 t1 = Thread(target=test)
 t1.setName("check")

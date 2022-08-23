@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 from django.conf import settings
 
 # ret = requests.get("http://www.google.com")
@@ -17,7 +18,6 @@ res = requests.get(url)
 json_str = res.content.decode()
 data = json.loads(json_str)
 print(data)
-
 
 # from datetime import datetime
 # print(datetime.year)

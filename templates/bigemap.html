@@ -139,7 +139,7 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 <script>
 
     //软件配置信息地址
@@ -230,8 +230,8 @@
 <script>
 
     flag_search_all = false;
-      query_num = 0;
-      item_num = 0;
+    query_num = 0;
+    item_num = 0;
     /*
     *     $.ajaxSetup({
 
@@ -250,15 +250,108 @@
         map.panTo(marker.getLatLng())
         circle.setLatLng(marker.getLatLng())
     }
+
     function click_search_detail_pro(e) {
-         var cur_dom = $(e);
-           if (flag_search_all) {
+        var cur_dom = $(e);
+        if (flag_search_all) {
+            alert('Please wait until the search task is finished！！！')
+        } else {
+            flag_search_all = true
+            var id_list = [];
+            var id = cur_dom.parent().parent().attr('id')
+            id_list.push(id)
+            // 将id_list 变为json串
+            var ids = JSON.stringify(id_list)
+            var index = 0;
+            $('.progress-bar').css('width', 0);
+            $('#pro_bar').css('display', 'block')
+            var t6 = window.setInterval(function () {
+                if (index < 100) {
+                    index += 33;
+                    s = String(index) + '%'
+                    $('.progress-bar').css('width', s)
+                }
+                console.log(index)
+            }, 1000)
+
+            $.ajax({
+                url: '/search_detail_by_ids/?place_ids=' + ids,
+                type: 'get',
+                error: function () {
+                    flag_search_all = false;
+                    window.clearInterval(t6);
+                    $('.progress-bar').css('width', '100%');
+                    setTimeout(function () {
+                        $('#pro_bar').css('display', 'none');
+                    }, 500)
+
+                },
+                success: function (ret) {
+                    flag_search_all = false;
+                    window.clearInterval(t6);
+                    $('.progress-bar').css('width', '100%');
+                    setTimeout(function () {
+                        $('#pro_bar').css('display', 'none');
+                    }, 500)
+
+                    // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
+
+                    if (ret.code == 1) {
+                        var data = ret.data;
+                        for (var i = 0; i < data.length; i++) {
+                            var place_id = data[i].pid
+                            var td_html = data[i].td_html
+                            if (td_html) {
+                                // 根据place_id 找到之前的tr，然后替换为新的td_html
+                                var str_id = '#' + place_id;
+                                $(str_id).replaceWith(td_html)
+                            } else {
+                                // td_html = ‘’ 说明详情页中包含中文，不要该结果！！
+                                var str_id = '#' + place_id;
+                                $(str_id).remove();
+                            }
+                        }
+                        {#click_a();#}
+                        // {#click_search_detail();#}
+                        {#click_delete();#}
+                    } else if (ret.code == -1) {
+                        alert(ret.msg);
+                    } else {
+                        var str_id = '#' + id;
+                        $(str_id).remove()
+                    }
+                }
+            })
+        }
+    }
+
+    function click_delete_pro(e) {
+        var cur_dom = $(e);
+        cur_dom.parent().parent().remove();
+    }
+
+
+    function click_a() {
+        $('.search_result_name').click(function () {
+            var lat = $(this).attr('lat');
+            var lng = $(this).attr('lng');
+            console.log('click aa')
+            marker.setLatLng({lat: lat, lng: lng});
+            // {#map.setZoom(6);#}
+            map.panTo(marker.getLatLng())
+            circle.setLatLng(marker.getLatLng())
+        })
+    }
+
+    // 点击某一个具体的搜索详情
+    function click_search_detail() {
+        $('.search_detail_child').click(function () {
+            if (flag_search_all) {
                 alert('Please wait until the search task is finished！！！')
-            } else
-                {
+            } else {
                 flag_search_all = true
                 var id_list = [];
-                var id = cur_dom.parent().parent().attr('id')
+                var id = $(this).parent().parent().attr('id')
                 id_list.push(id)
                 // 将id_list 变为json串
                 var ids = JSON.stringify(id_list)
@@ -277,9 +370,9 @@
                 $.ajax({
                     url: '/search_detail_by_ids/?place_ids=' + ids,
                     type: 'get',
-                    error:function(){
+                    error: function () {
                         flag_search_all = false;
-                         window.clearInterval(t6);
+                        window.clearInterval(t6);
                         $('.progress-bar').css('width', '100%');
                         setTimeout(function () {
                             $('#pro_bar').css('display', 'none');
@@ -316,102 +409,7 @@
                             {#click_delete();#}
                         } else if (ret.code == -1) {
                             alert(ret.msg);
-                        }
-                        else {
-                            var str_id = '#' + id;
-                            $(str_id).remove()
-                        }
-                    }
-                })
-            }
-    }
-    function click_delete_pro(e) {
-         var cur_dom = $(e);
-         cur_dom.parent().parent().remove();
-    }
-
-
-    function click_a() {
-        $('.search_result_name').click(function () {
-            var lat = $(this).attr('lat');
-            var lng = $(this).attr('lng');
-            console.log('click aa')
-            marker.setLatLng({lat: lat, lng: lng});
-            // {#map.setZoom(6);#}
-            map.panTo(marker.getLatLng())
-            circle.setLatLng(marker.getLatLng())
-        })
-    }
-    // 点击某一个具体的搜索详情
-    function click_search_detail() {
-        $('.search_detail_child').click(function () {
-            if (flag_search_all) {
-                alert('Please wait until the search task is finished！！！')
-            } else
-                {
-                flag_search_all = true
-                var id_list = [];
-                var id = $(this).parent().parent().attr('id')
-                id_list.push(id)
-                // 将id_list 变为json串
-                var ids = JSON.stringify(id_list)
-                var index = 0;
-                $('.progress-bar').css('width', 0);
-                $('#pro_bar').css('display', 'block')
-                var t6 = window.setInterval(function () {
-                    if (index < 100) {
-                        index += 33;
-                        s = String(index) + '%'
-                        $('.progress-bar').css('width', s)
-                    }
-                    console.log(index)
-                }, 1000)
-
-                $.ajax({
-                    url: '/search_detail_by_ids/?place_ids=' + ids,
-                    type: 'get',
-                    error:function(){
-                        flag_search_all = false;
-                         window.clearInterval(t6);
-                        $('.progress-bar').css('width', '100%');
-                        setTimeout(function () {
-                            $('#pro_bar').css('display', 'none');
-                        }, 500)
-
-                    },
-                    success: function (ret) {
-                        flag_search_all = false;
-                        window.clearInterval(t6);
-                        $('.progress-bar').css('width', '100%');
-                        setTimeout(function () {
-                            $('#pro_bar').css('display', 'none');
-                        }, 500)
-
-                        // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
-
-                        if (ret.code == 1) {
-                            var data = ret.data;
-                            for (var i = 0; i < data.length; i++) {
-                                var place_id = data[i].pid
-                                var td_html = data[i].td_html
-                                if (td_html) {
-                                    // 根据place_id 找到之前的tr，然后替换为新的td_html
-                                    var str_id = '#' + place_id;
-                                    $(str_id).replaceWith(td_html)
-                                } else {
-                                    // td_html = ‘’ 说明详情页中包含中文，不要该结果！！
-                                    var str_id = '#' + place_id;
-                                    $(str_id).remove();
-                                }
-                            }
-                            {#click_a();#}
-                            // {#click_search_detail();#}
-                            {#click_delete();#}
-                        }
-               else if(ret.code==-1){
-                                    alert(ret.msg);
-                                }
-            else {
+                        } else {
                             var str_id = '#' + id;
                             $(str_id).remove()
                         }
@@ -420,6 +418,7 @@
             }
         });
     }
+
     // 点击某一个具体的删除时
     function click_delete() {
         $('.delete_data_child').click(function () {
@@ -436,66 +435,65 @@
         {#click_delete();#}
     }
 
-    function extra_search(word, current_lat, radius,current_lng) {
-            flag_search_all = true
-            var index = 0;
-            $('.progress-bar').css('width', 0)
-            $('#pro_bar').css('display', 'block')
-            t4 = window.setInterval(function () {
-                if (index < 100) {
-                    index += 5;
-                    s = String(index) + '%'
-                    $('.progress-bar').css('width', s)
-                }
-                console.log(index)
-            }, 1000)
+    function extra_search(word, current_lat, radius, current_lng) {
+        flag_search_all = true
+        var index = 0;
+        $('.progress-bar').css('width', 0)
+        $('#pro_bar').css('display', 'block')
+        t4 = window.setInterval(function () {
+            if (index < 100) {
+                index += 5;
+                s = String(index) + '%'
+                $('.progress-bar').css('width', s)
+            }
+            console.log(index)
+        }, 1000)
 
-            $.ajax({
-                url: '/extra_search/',
-                type: 'post',
-                data: {
-                    'word': word,
-                    'radius': radius,
-                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-                    'lat': current_lat,
-                    'lng': current_lng,
-                },
-                error: function () {
+        $.ajax({
+            url: '/extra_search/',
+            type: 'post',
+            data: {
+                'word': word,
+                'radius': radius,
+                'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+                'lat': current_lat,
+                'lng': current_lng,
+            },
+            error: function () {
 
-                    window.clearInterval(t4);
-                    $('.progress-bar').css('width', '100%');
-                    setTimeout(function () {
-                        $('#pro_bar').css('display', 'none');
-                    }, 0.5);
-                    flag_search_all = false;
-                    alert("服务器繁忙，请稍后重试！");
+                window.clearInterval(t4);
+                $('.progress-bar').css('width', '100%');
+                setTimeout(function () {
+                    $('#pro_bar').css('display', 'none');
+                }, 0.5);
+                flag_search_all = false;
+                alert("服务器繁忙，请稍后重试！");
+            }
+            ,
+            success: function (ret) {
+                window.clearInterval(t4);
+                $('.progress-bar').css('width', '100%');
+                setTimeout(function () {
+                    $('#pro_bar').css('display', 'none');
+                }, 0.5);
+                flag_search_all = false
+                if (ret.status == 1) {
+                    get_search_list(ret.data_final_html)
+                } else {
+                    alert(ret.msg)
                 }
-                ,
-                success: function (ret) {
-                    window.clearInterval(t4);
-                    $('.progress-bar').css('width', '100%');
-                    setTimeout(function () {
-                        $('#pro_bar').css('display', 'none');
-                    }, 0.5);
-                    flag_search_all = false
-                    if (ret.status == 1) {
-                        get_search_list(ret.data_final_html)
-                    } else {
-                        alert(ret.msg)
-                    }
-                }
-            });
-        }
+            }
+        });
+    }
 
-    function listen(li,li_len){
+    function listen(li, li_len) {
         $('.progress-bar').css('width', 0);
         $('#pro_bar').css('display', 'block')
         console.log('this is listen')
         console.log(query_num)
         console.log(li_len)
         t2 = window.setInterval(function () {
-            if (query_num < li_len)
-            {
+            if (query_num < li_len) {
                 //   i    /  l         index/i = 100/l    index = 100 * i / l
                 //  index / 100
                 var index = 100 * query_num / li_len
@@ -504,8 +502,7 @@
                 s = String(index) + '%'
                 $('.progress-bar').css('width', s)
                 console.log(s)
-            }
-            else {
+            } else {
 
                 // 当全部tr的详情搜索完毕时，将flag设为false，将进度条去除。将计时器去除，添加点击定位坐标事件和删除tr事件
 
@@ -642,22 +639,20 @@
                                         if (flag_search_all) {
                                             alert('Some tasks are not finished. Please wait for the task to finish！')
                                         } else {
-                                            extra_search(word, current_lat,radius, current_lng);
+                                            extra_search(word, current_lat, radius, current_lng);
                                         }
                                     }
                                 }, 2000)
-                            }
-                            else if(ret.status == -2){
+                            } else if (ret.status == -2) {
                                 alert("本月搜索量已达上限！")
-                            }
-                            else {
+                            } else {
                                 // 第一次就没搜到结果！！
                                 var flag2 = confirm('No nearby related results are found. Do you want to expand the search scope？')
                                 if (flag2) {
                                     if (flag_search_all) {
                                         alert('Some tasks are not finished. Please wait for the task to finish！')
                                     } else {
-                                        extra_search(word, current_lat, radius,current_lng);
+                                        extra_search(word, current_lat, radius, current_lng);
                                     }
                                 }
                             }
@@ -676,13 +671,12 @@
                 var li = $("input[class='data_td']:checked")
                 var li_len = li.length;
                 console.log(li_len)
-                listen(li,li_len);
+                listen(li, li_len);
 
                 item_num = 0;
                 t_search = setInterval(function () {
                     console.log('this is t search')
-                    if (item_num<li.length)
-                    {
+                    if (item_num < li.length) {
                         var id_list = [];
                         // 将每一个勾选状态的 placeid 放到一个列表中
                         var id = li.eq(item_num).parent().parent().attr('id');
@@ -694,7 +688,7 @@
                         $.ajax({
                             url: '/search_detail_by_ids/?place_ids=' + ids,
                             type: 'get',
-                            error:function(){
+                            error: function () {
                                 query_num++;
                                 var str_id = '#' + id;
                                 $(str_id).remove();
@@ -719,64 +713,61 @@
                                     // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
                                     //  click_a();
                                     // click_delete();
-                                }
-                                else if(ret.code==-1){
+                                } else if (ret.code == -1) {
                                     alert(ret.msg);
-                                }
-                                else {
+                                } else {
                                     var str_id = '#' + id;
                                     $(str_id).remove();
                                 }
                             }
                         })
-                    }
-                    else{
+                    } else {
                         clearInterval(t_search)
                     }
-                },3000)
-               {% comment %} for (var i = 0; i < li.length; i++) {
-                    var id_list = [];
-                    // 将每一个勾选状态的 placeid 放到一个列表中
-                    var id = li.eq(i).parent().parent().attr('id')
-                    id_list.push(id)
-                    // 将id_list 变为json串
-                    var ids = JSON.stringify(id_list)
-                    {#var li_len = li.length; // 1个3 秒   一共  3 * l * x = 100  x = 100/5/l = 20/l    100/l#}
-                    $.ajax({
-                        url: '/search_detail_by_ids/?place_ids=' + ids,
-                        type: 'get',
-                        error:function(){
-                            query_num++;
-                            var str_id = '#' + id;
-                            $(str_id).remove();
-                        },
-                        success: function (ret) {
-                            query_num++;
-                            if (ret.code == 1) {
-                                // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
-                                var data = ret.data;
-                                for (var i = 0; i < data.length; i++) {
-                                    var place_id = data[i].pid
-                                    var td_html = data[i].td_html
-                                    if (td_html) {
-                                        // 根据place_id 找到之前的tr，然后替换为新的td_html
-                                        var str_id = '#' + place_id;
-                                        $(str_id).replaceWith(td_html)
-                                    } else {
-                                        var str_id = '#' + place_id;
-                                        $(str_id).remove();
-                                    }
-                                }
-                                // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
-                                //  click_a();
-                                // click_delete();
-                            } else {
-                                var str_id = '#' + id;
-                                $(str_id).remove();
-                            }
-                        }
-                    })
-                }{% endcomment %}
+                }, 3000)
+                {% comment %} for (var i = 0; i < li.length; i++) {
+                     var id_list = [];
+                     // 将每一个勾选状态的 placeid 放到一个列表中
+                     var id = li.eq(i).parent().parent().attr('id')
+                     id_list.push(id)
+                     // 将id_list 变为json串
+                     var ids = JSON.stringify(id_list)
+                     {#var li_len = li.length; // 1个3 秒   一共  3 * l * x = 100  x = 100/5/l = 20/l    100/l#}
+                     $.ajax({
+                         url: '/search_detail_by_ids/?place_ids=' + ids,
+                         type: 'get',
+                         error:function(){
+                             query_num++;
+                             var str_id = '#' + id;
+                             $(str_id).remove();
+                         },
+                         success: function (ret) {
+                             query_num++;
+                             if (ret.code == 1) {
+                                 // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
+                                 var data = ret.data;
+                                 for (var i = 0; i < data.length; i++) {
+                                     var place_id = data[i].pid
+                                     var td_html = data[i].td_html
+                                     if (td_html) {
+                                         // 根据place_id 找到之前的tr，然后替换为新的td_html
+                                         var str_id = '#' + place_id;
+                                         $(str_id).replaceWith(td_html)
+                                     } else {
+                                         var str_id = '#' + place_id;
+                                         $(str_id).remove();
+                                     }
+                                 }
+                                 // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
+                                 //  click_a();
+                                 // click_delete();
+                             } else {
+                                 var str_id = '#' + id;
+                                 $(str_id).remove();
+                             }
+                         }
+                     })
+                 }{% endcomment %}
             }
 
 

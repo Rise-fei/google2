@@ -3,42 +3,53 @@ body {
     margin: 0;
     padding: 0;
 }
-#div_1{
+
+#div_1 {
     position: fixed;
     background-color: white;
     z-index: 6;
 }
-#div_2{
+
+#div_2 {
     position: relative;
     top: 110px;
     z-index: 1;
 }
-#table_1{
-    background-color: white;z-index: 6;table-layout: fixed;
+
+#table_1 {
+    background-color: white;
+    z-index: 6;
+    table-layout: fixed;
 }
-#table_2{
-    z-index: 1;table-layout: fixed;
+
+#table_2 {
+    z-index: 1;
+    table-layout: fixed;
 }
+
 input[type=checkbox] {
     width: 20px;
 }
-.table>thead>tr>th {
+
+.table > thead > tr > th {
     vertical-align: middle;
     text-align: center;
 }
+
 td {
-    overflow:hidden;
+    overflow: hidden;
     /*white-space:nowrap;*/
-    width:100%;
-    text-overflow:ellipsis;
+    width: 100%;
+    text-overflow: ellipsis;
     text-align: center;
 }
 
 table tr td:nth-child(1) {
-    width: 40px!important;
+    width: 40px !important;
 }
+
 table tr td:last-child {
-    width: 160px!important;
+    width: 160px !important;
 }
 
 input:focus {

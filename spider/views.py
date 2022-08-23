@@ -1,20 +1,19 @@
-from django.shortcuts import render, redirect, HttpResponse
-from django.http import JsonResponse
-import requests
 import json
-import time
-from django.conf import settings
-import requests
-from spider.models import CustLoginRecord, SearchResult,RequestCount,RequestDetailCount,Country
-from tools.query_email import *
-from threading import Thread,enumerate as threading_enumerate
 import random
 from datetime import datetime
+from threading import Thread, enumerate as threading_enumerate
+
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.db import connections
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, HttpResponse
+
+from spider.models import CustLoginRecord, SearchResult, RequestCount, RequestDetailCount, Country
+from tools.query_email import *
 
 
-def save_db(count1=0,count2=0):
+def save_db(count1=0, count2=0):
     try:
         conn = connections['beijingdb']
         print(conn)
@@ -49,7 +48,7 @@ def google(request):
 
 
 def save(i):
-    s = SearchResult.objects.filter(id__gt=i,id__lt=(i+1001))
+    s = SearchResult.objects.filter(id__gt=i, id__lt=(i + 1001))
     for i in s:
         a = i.td_html
         if "详情查询" in a:
@@ -58,18 +57,17 @@ def save(i):
             i.td_html = a
             i.save()
 
+
 def test2(request):
-    save_db(1,1)
+    save_db(1, 1)
 
     return HttpResponse(1)
 
 
-
-
 def test(request):
-    li = list(range(48980,67003,1000))
+    li = list(range(48980, 67003, 1000))
     for i in li:
-        t = Thread(target=save,args=(i,))
+        t = Thread(target=save, args=(i,))
         t.start()
 
     return HttpResponse(1)
@@ -78,14 +76,16 @@ def test(request):
 def save_country():
     country_list = SearchResult.objects.all().values('country').distinct()
     print(country_list)
-    li = [Country(index+1,country["country"]).save() for index,country in enumerate(country_list) if country["country"] is not None]
+    li = [Country(index + 1, country["country"]).save() for index, country in enumerate(country_list) if
+          country["country"] is not None]
 
     # Country.objects.bulk_create(li)
 
+
 def query_db_data(request):
     word = request.GET.get('word')
-    country = request.GET.get('country','all')
-    pagenum = request.GET.get('pagenum',1)
+    country = request.GET.get('country', 'all')
+    pagenum = request.GET.get('pagenum', 1)
     if country == 'all':
         # 查询全部数据
         res = SearchResult.objects.all().filter(search_word=word).order_by('status').order_by('country')
@@ -110,7 +110,8 @@ def query_db_data(request):
     print('----------------------------')
     res = paginator.page(pagenum)
     country_list = Country.objects.all()
-    return render(request,'query_db_data.html',locals())
+    return render(request, 'query_db_data.html', locals())
+
 
 def query_from_db_backup(request):
     if request.method == 'GET':
@@ -119,35 +120,33 @@ def query_from_db_backup(request):
 
         # Thread(target=save_country,args=())
 
-
-        return render(request,'query_db.html',locals())
+        return render(request, 'query_db.html', locals())
     else:
         word = request.POST.get('word')
         country = request.POST.get('country')
 
-        print(word,country)
+        print(word, country)
         if country == 'all':
             # 查询全部数据
             res = SearchResult.objects.all().filter(search_word=word).order_by('status').order_by('country')
         elif country == 'all_detail':
             # 查询全部已经搜索的数据
-            res = SearchResult.objects.all().filter(search_word=word,status=1).order_by('country')
+            res = SearchResult.objects.all().filter(search_word=word, status=1).order_by('country')
         elif country == 'not_detail':
             # 查询全部未搜索的数据
-            res = SearchResult.objects.all().filter(search_word=word,status=0).order_by('country')
+            res = SearchResult.objects.all().filter(search_word=word, status=0).order_by('country')
         else:
             # 查询某个国家的搜索数据！！！
-            res = SearchResult.objects.all().filter(search_word=word,country=country)
-
+            res = SearchResult.objects.all().filter(search_word=word, country=country)
 
         if res:
             final_html = ''
             for data in res:
                 final_html += data.td_html
             ret = {
-                'code':1,
-                'msg':'Find out the result',
-                'data':final_html
+                'code': 1,
+                'msg': 'Find out the result',
+                'data': final_html
             }
         else:
             ret = {
@@ -156,11 +155,12 @@ def query_from_db_backup(request):
             }
         return JsonResponse(ret)
 
+
 def query_from_db(request):
     if request.method == 'GET':
         country_list = Country.objects.all()
         # Thread(target=save_country,args=())
-        return render(request,'query_db.html',locals())
+        return render(request, 'query_db.html', locals())
 
 
 def bigemap(request):
@@ -179,7 +179,7 @@ def offline(request):
         authorization_num = int(res)
         cust_records = CustLoginRecord.objects.filter(username=username).order_by('-login_time')
         print(len(cust_records))
-        if cust_records[authorization_num-1]:
+        if cust_records[authorization_num - 1]:
             for cust in cust_records[authorization_num - 1:]:
                 # 超出授权数，向oa系统发送请求清除当前sessionkey对应的session信息。
                 oa_session_key = cust.oa_session_key
@@ -227,7 +227,7 @@ def offline(request):
         print('9876543125')
         ret = {
             'code': 0,
-            'username':username,
+            'username': username,
         }
         response = JsonResponse(ret)
     return response
@@ -237,7 +237,7 @@ def offline(request):
 def logout_all_cuser(request):
     cname = request.GET.get('username')
     productid = settings.PRODUCT
-    url = 'http://www.sstrade.net:8888/ssapi/logout_cuser_all?productid='+str(productid)+'&cusername='+cname
+    url = 'http://www.sstrade.net:8888/ssapi/logout_cuser_all?productid=' + str(productid) + '&cusername=' + cname
     print(url)
     res = requests.get(url)
     print(res)
@@ -292,7 +292,7 @@ def login_check(request):
     print(username)
     print(password)
     url = 'http://www.sstrade.net:8888/ssapi/customerlogin/?username=%s&password=%s&product=%s&version=%s' % (
-    username, password, product, version)
+        username, password, product, version)
     res = requests.get(url)
     response_content = res.content.decode()
     print(response_content)
@@ -397,8 +397,6 @@ def check_status(request):
         return HttpResponse("检测线程已开启")
 
 
-
-
 # {"username":"ceshi","is_login":true,"session_key":"rdaa69o8r9u7umoke23yjrwx1crr9p2o","_session_expiry":0}
 # {"username":"ceshi","is_login":true,"session_key":"rdaa69o8r9u7umoke23yjrwx1crr9p2o","_session_expiry":0}
 def logout(request):
@@ -462,7 +460,7 @@ def search_word(request):
     try:
         place_id = data['candidates'][0]['place_id']
         url2 = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=%s%s%s%s' % (
-        place_id, key, language, key)
+            place_id, key, language, key)
         res2 = requests.get(url2)
         json_str2 = res2.content.decode()
         data2 = json.loads(json_str2)
@@ -482,7 +480,7 @@ def search_word(request):
         d_twitter = data_result.get('twitter', "")
         d_search_word = word
         data_html = data_html % (
-        d_name, d_website, d_email, d_type, d_addr, d_phone, d_facebook, d_youtube, d_twitter, d_search_word)
+            d_name, d_website, d_email, d_type, d_addr, d_phone, d_facebook, d_youtube, d_twitter, d_search_word)
 
         ret = {
             'status': 1,
@@ -536,7 +534,8 @@ def search_word(request):
                 d_twitter = data_result.get('twitter', "")
                 d_search_word = word
                 data_html = data_html % (
-                d_name, d_website, d_email, d_type, d_addr, d_phone, d_facebook, d_youtube, d_twitter, d_search_word)
+                    d_name, d_website, d_email, d_type, d_addr, d_phone, d_facebook, d_youtube, d_twitter,
+                    d_search_word)
                 data_final_html += data_html
             ret = {
                 'status': 0,
@@ -622,8 +621,6 @@ def search_detail(place_id,word):
 """
 
 
-
-
 # 精准搜索 暂时不用！！
 
 def search_place_text(request):
@@ -666,10 +663,6 @@ def search_place_text(request):
     return JsonResponse(ret)
 
 
-
-
-
-
 def search_detail_by_ids(request):
     try:
         ids = request.GET.get('place_ids')
@@ -682,11 +675,11 @@ def search_detail_by_ids(request):
                 # 搜索完详情，将详情信息更新到数据库中，并设置status = 1
                 word = p_obj.search_word
                 cname = request.session["username"]
-                data_html = search_detail(id, word, p_obj,cname)
+                data_html = search_detail(id, word, p_obj, cname)
                 if data_html == -1:
                     ret = {
-                        'code':-1,
-                        'msg':"当月搜索量已达限制！"
+                        'code': -1,
+                        'msg': "当月搜索量已达限制！"
                     }
                     return JsonResponse(ret)
                 if data_html is None:
@@ -698,13 +691,13 @@ def search_detail_by_ids(request):
 
         ret = {
             'data': data_list,  # [{},{},{},{}]
-            'code':1,
+            'code': 1,
         }
     except Exception as e:
         print('eeeeeeerror')
         print(e)
         ret = {
-            'code':0,
+            'code': 0,
         }
     return JsonResponse(ret)
 
@@ -727,7 +720,7 @@ def search_near_by_latlng(lat, lng, word, radius):
 
 
 # 第一层：搜索附近的相关信息（粗略搜索，只有名字等信息。）
-def search_near_by(lat, lng, word, radius,cname):
+def search_near_by(lat, lng, word, radius, cname):
     # 执行附近搜索,只是优先显示附近的结果
     '''
      # print('当前搜索地点关键字无具体结果,即将搜索附近结果！')
@@ -768,8 +761,6 @@ def search_near_by(lat, lng, word, radius,cname):
     else:
         rc = RequestCount.objects.create(count=0, month=month, year=year, customer=cust_name)
 
-
-
     data = search_near_by_latlng(lat, lng, word, radius)
     count = 1
     if len(data['results']) == 0:
@@ -789,7 +780,7 @@ def search_near_by(lat, lng, word, radius,cname):
             print('还有数据，接着请求！')
             key = settings.google_map_key
             next_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=%s&pagetoken=%s" % (
-            key, next_page_token)
+                key, next_page_token)
             next_res = requests.get(next_url)
             print(next_url)
             count += 1
@@ -811,7 +802,7 @@ def search_near_by(lat, lng, word, radius,cname):
         # ******************
 
         data_final_html = ''
-        for index,data_result in enumerate(data['results']):
+        for index, data_result in enumerate(data['results']):
             # 去除所有包含中文的数据！！！
             reg = re.compile(u'[\u4e00-\u9fa5]')  # 检查中文
             contents = data_result
@@ -891,7 +882,7 @@ def search_near_by(lat, lng, word, radius,cname):
     rc.count = rc.count + count
     rc.save()
 
-    save_db(count,0)
+    save_db(count, 0)
 
     # time_str = time.strftime("%Y-%m-%d")
     # sql = "select * from gms_record WHERE DATE_FORMAT(date, '%Y-%m-%d')='%s';"
@@ -902,13 +893,12 @@ def search_near_by(lat, lng, word, radius,cname):
 
 # ********************************************
 
-def search_detail(place_id, word, p_obj,cname):
-
+def search_detail(place_id, word, p_obj, cname):
     cust_name = cname
     month = datetime.now().month
     year = datetime.now().year
 
-    rc = RequestDetailCount.objects.filter(month=month,year=year,customer=cust_name)
+    rc = RequestDetailCount.objects.filter(month=month, year=year, customer=cust_name)
     print(rc)
     if rc:
         rc = rc[0]
@@ -918,8 +908,7 @@ def search_detail(place_id, word, p_obj,cname):
             return -1
 
     else:
-        rc = RequestDetailCount.objects.create(count=0,month=month,year=year,customer=cust_name)
-
+        rc = RequestDetailCount.objects.create(count=0, month=month, year=year, customer=cust_name)
 
     key = settings.google_map_key
     language = 'en'
@@ -927,7 +916,7 @@ def search_detail(place_id, word, p_obj,cname):
              'price_level,rating,review,user_ratings_total,' \
              'formatted_phone_number,international_phone_number,opening_hours,website'
     url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=%s&key=%s&language=%s&fields=%s' % (
-    place_id, key, language, fields)
+        place_id, key, language, fields)
     res = requests.get(url)
     json_str = res.content.decode()
     data = json.loads(json_str)
@@ -936,8 +925,6 @@ def search_detail(place_id, word, p_obj,cname):
     rc.count = rc.count + count
     rc.save()
     save_db(0, 1)
-
-
 
     # print(data)
     # path = settings.BASE_DIR + '\json_data\\search_place_detail\\' + word + '_detail.json'
@@ -996,29 +983,28 @@ def search_detail(place_id, word, p_obj,cname):
         if d_website:
             try:
                 SERVER_LIST = [
-                        "47.252.3.225:8080",# 美国服务器1
-                        "147.139.6.71:8080",# 印度服务器
-                        # "47.88.19.94:8080",# 美国服务器2
-                        "47.254.241.59:8080",# 马来西亚
-                    ]
+                    "47.252.3.225:8080",  # 美国服务器1
+                    "147.139.6.71:8080",  # 印度服务器
+                    # "47.88.19.94:8080",# 美国服务器2
+                    "47.254.241.59:8080",  # 马来西亚
+                ]
                 server = random.choice(SERVER_LIST)
-                url = 'http://{}/get_socials/?website={}'.format(server,d_website)
+                url = 'http://{}/get_socials/?website={}'.format(server, d_website)
                 ret = requests.get(url=url)
                 print(ret.content)
                 ret = json.loads(ret.content)
                 print(ret)
 
-                d_email = ret.get("email","")
+                d_email = ret.get("email", "")
                 # d_phone += ret.get("phone","")
-                d_facebook = ret.get("facebook","")
-                d_twitter = ret.get("twitter","")
+                d_facebook = ret.get("facebook", "")
+                d_twitter = ret.get("twitter", "")
 
                 if not d_email:
                     url = 'http://{}/get_mail/?website={}'.format(server, d_website)
                     ret = requests.get(url=url)
                     ret = json.loads(ret.content)
-                    d_email = ret.get("mail","")
-
+                    d_email = ret.get("mail", "")
 
                 # result = getWebSource(d_website)
                 # d_facebook = result['result']['facebook']
@@ -1038,12 +1024,11 @@ def search_detail(place_id, word, p_obj,cname):
                 d_country = i['long_name']
 
         data_html = data_html % (d_place_id, lat, lng,
-                                 d_name, d_website,d_website, d_email, d_country, d_addr, d_phone,
+                                 d_name, d_website, d_website, d_email, d_country, d_addr, d_phone,
                                  d_facebook, d_facebook,
-                                 d_youtube,d_youtube,
-                                 d_twitter,d_twitter,
+                                 d_youtube, d_youtube,
+                                 d_twitter, d_twitter,
                                  d_search_word)
-
 
         try:
             p_obj.website = d_website
@@ -1074,6 +1059,7 @@ def search_detail(place_id, word, p_obj,cname):
         # }
         return data_html
 
+
 def search_place_text2(request):
     # 获取地图中心的经纬度坐标
     lat = request.POST.get('lat')
@@ -1091,11 +1077,11 @@ def search_place_text2(request):
     lng = lng_float
     word = request.POST.get('word')
     radius = request.POST.get('radius')
-    print(lat,lng,word,radius)
+    print(lat, lng, word, radius)
 
     cname = request.session["username"]
     print(cname)
-    ret = search_near_by(lat, lng, word, radius,cname)
+    ret = search_near_by(lat, lng, word, radius, cname)
     return JsonResponse(ret)
 
 
@@ -1115,12 +1101,11 @@ def extra_search(request):
     word = request.POST.get('word')
     radius = request.POST.get('radius')
     cname = request.session["username"]
-    ret = extra_search_near_by(lat, lng, word, radius,cname)
+    ret = extra_search_near_by(lat, lng, word, radius, cname)
     return JsonResponse(ret)
 
 
-def extra_search_near_by(lat, lng, word, radius,cname):
-
+def extra_search_near_by(lat, lng, word, radius, cname):
     cust_name = cname
     month = datetime.now().month
     year = datetime.now().year
@@ -1136,8 +1121,6 @@ def extra_search_near_by(lat, lng, word, radius,cname):
             return ret
     else:
         rc = RequestCount.objects.create(count=0, month=month, year=year, customer=cust_name)
-
-
 
     final_data_result = []
 
@@ -1221,7 +1204,6 @@ def extra_search_near_by(lat, lng, word, radius,cname):
                                   </tr>
                                   '''
 
-
                 lat = data_result['geometry']['location']['lat']
                 lng = data_result['geometry']['location']['lng']
                 name = data_result['name']
@@ -1241,12 +1223,9 @@ def extra_search_near_by(lat, lng, word, radius,cname):
             'msg': '未查询到结果，请更换位置进行搜索!!!'
         }
 
-
     rc.count = rc.count + count
     rc.save()
 
-    save_db(count,0)
+    save_db(count, 0)
 
     return ret
-
-

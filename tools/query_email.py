@@ -1,8 +1,9 @@
-import requests
-import time
-import re
 import random
+import re
+import time
 from collections import Counter
+
+import requests
 from lxml.html import etree
 
 headers = {
@@ -12,7 +13,7 @@ headers = {
 #             'https': 'https://lum-customer-sstrade-zone-residential-country-us:4xcrhdlj831p@zproxy.lum-superproxy.io:22225'}
 #
 proxies_home = {
-'http': 'http://lum-customer-sstrade-zone-residential-country-us:Shengshikeji666@zproxy.lum-superproxy.io:22225',
+    'http': 'http://lum-customer-sstrade-zone-residential-country-us:Shengshikeji666@zproxy.lum-superproxy.io:22225',
     'https': 'http://lum-customer-sstrade-zone-residential-country-us:Shengshikeji666@zproxy.lum-superproxy.io:22225'
 }
 
@@ -21,18 +22,19 @@ proxies_google_search = {
     'https': 'http://lum-customer-c_0ba1644e-zone-zone2:rhiixqunrysr@zproxy.lum-superproxy.io:22225'
 }
 proxies_data1 = {'http': 'http://lum-customer-c_0ba1644e-zone-zone1:3h2xatfe2ks1@zproxy.lum-superproxy.io:22225',
-            'https': 'http://lum-customer-c_0ba1644e-zone-zone1:3h2xatfe2ks1@zproxy.lum-superproxy.io:22225'}
+                 'https': 'http://lum-customer-c_0ba1644e-zone-zone1:3h2xatfe2ks1@zproxy.lum-superproxy.io:22225'}
 proxies_data2 = {'http': 'http://lum-customer-c_0ba1644e-zone-dongnanya:01z2e4at7eps@zproxy.lum-superproxy.io:22225',
-            'https': 'http://lum-customer-c_0ba1644e-zone-dongnanya:01z2e4at7eps@zproxy.lum-superproxy.io:22225'}
+                 'https': 'http://lum-customer-c_0ba1644e-zone-dongnanya:01z2e4at7eps@zproxy.lum-superproxy.io:22225'}
 
-proxies_data = random.choice([proxies_data1,proxies_data2])
+proxies_data = random.choice([proxies_data1, proxies_data2])
+
 
 # proxies_home = {}
 # proxies_google_search = {
 # }
 # proxies_data= {}
 
-def add_data(data_results,SearchResult,word):
+def add_data(data_results, SearchResult, word):
     for data_result in data_results:
         place_id = data_result['place_id']
         type_str = ""
@@ -63,15 +65,17 @@ def add_data(data_results,SearchResult,word):
         lat = data_result['geometry']['location']['lat']
         lng = data_result['geometry']['location']['lng']
         name = data_result['name']
-        data_html = data_html % (place_id,lat,lng,name,word)
+        data_html = data_html % (place_id, lat, lng, name, word)
         try:
             if not SearchResult.objects.filter(place_id=place_id):
                 SearchResult.objects.create(name=name, type=type_str, search_word=word, place_id=place_id,
-                                                      td_html=data_html)
+                                            td_html=data_html)
             else:
                 print('The data already exists in the database, so there is no need to add it again！！！')
         except Exception as e:
             print(e)
+
+
 def googlemail(kw):
     headers = {
         "cookie": "CGIC=IocBdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksaW1hZ2UvYXZpZixpbWFnZS93ZWJwLGltYWdlL2FwbmcsKi8qO3E9MC44LGFwcGxpY2F0aW9uL3NpZ25lZC1leGNoYW5nZTt2PWIzO3E9MC45; CONSENT=YES+US.zh-CN+201905; HSID=ADxkA6jzRB6Pv9F4f; SSID=A6ROAQ3F_zuaK1Qwr; APISID=h4CpiJt_FUn_veK_/A7UK8BVyKyVS7O5ww; SAPISID=2TgO2q6ZyecVAxuJ/A8ww1CxfRa2RSfpqO; __Secure-3PAPISID=2TgO2q6ZyecVAxuJ/A8ww1CxfRa2RSfpqO; SEARCH_SAMESITE=CgQIr5EB; ANID=AHWqTUnfkyQzvSzNuYfwrEoHubemaKVuDbb3pPXl9ZvMvk4cdU0lZjX8JQz3B-Pw; SID=7AfkmR-_98Dy9Ua66h8MC5c4m2GrgPCHhzE0NGMHr39ScQF_L5f1FrZ-fsUuiXgitM0ItA.; __Secure-3PSID=7AfkmR-_98Dy9Ua66h8MC5c4m2GrgPCHhzE0NGMHr39ScQF_HBnPE0Oo0gUU4Ki3S52f8Q.; 1P_JAR=2021-02-23-02; UULE=a+cm9sZTogMQpwcm9kdWNlcjogMTIKdGltZXN0YW1wOiAxNjE0MDQ4NTM5MTIwMDAwCmxhdGxuZyB7CiAgbGF0aXR1ZGVfZTc6IDM0MDUyMjM0MgogIGxvbmdpdHVkZV9lNzogLTExODI0MzY4NDkKfQpyYWRpdXM6IDE3MDc1NDIwCnByb3ZlbmFuY2U6IDYK; NID=209=IjvE1SfOWSnDkdHPTmjjY_AKIQdvRZWb-TGnfJd3ELCa_xZnNiVE2NALXvzi3x6YK8arr-e6e8j_hr7VanuJq1q66cOKES0I0JgDBrWVP2Z-sQWTgef6BmDoyDdz9sh3yBpiL5vmpkDQTbjlToC5rRDmp69VU2p-pjCoLlPZtAzkdxvZKoZT7HVlybjr6mz_Wcny8KXGa-lNUABMCdjjTCNHZEosttiPKIr5CIfbg4CX_ZfuP8KQ3QwUMpV3l1W3IOMr0AHbn330bKFueuhw0SmmJE9m-b3PTkrdo4UyKWfBGYDmNu4",
@@ -112,7 +116,7 @@ def googlemail(kw):
     while mailstart <= 20:
         print(mailstart)
         searchurl = "https://www.bing.com/search?q={}&first={}&count=10".format(kw, mailstart)
-        resp = requests.get(searchurl, proxies=proxies_data,headers=headers)
+        resp = requests.get(searchurl, proxies=proxies_data, headers=headers)
         e = etree.HTML(resp.text)
         block_list = e.xpath("//li[@class='b_algo']")
         if not block_list:
@@ -144,6 +148,8 @@ def googlemail(kw):
             # yield result
         else:
             break
+
+
 def googlemailold(kw):
     mailstart = 0
     while mailstart <= 20:
@@ -151,7 +157,7 @@ def googlemailold(kw):
         searchurl = 'http://www.google.com/search?q={}&start={}'.format(kw, mailstart)
         print(searchurl)
         try:
-            resp = requests.get(searchurl,headers=headers,proxies=proxies_google_search)
+            resp = requests.get(searchurl, headers=headers, proxies=proxies_google_search)
             print(resp)
             if '找不到和您查询' not in resp.text:  # 说明有内容
                 ts = resp.text
@@ -208,7 +214,7 @@ def googlemail(kw):
     while mailstart <= 20:
         print(mailstart)
         searchurl = "https://www.bing.com/search?q={}&first={}&count=10".format(kw, mailstart)
-        resp = requests.get(searchurl, proxies=proxies_data,headers=headers)
+        resp = requests.get(searchurl, proxies=proxies_data, headers=headers)
         e = etree.HTML(resp.text)
         block_list = e.xpath("//li[@class='b_algo']")
         if not block_list:
@@ -239,6 +245,7 @@ def googlemail(kw):
         else:
             break
 
+
 def gettruest(mails):
     res = [i for item in mails for i in item]
     print(res)
@@ -253,6 +260,7 @@ def gettruest(mails):
     else:
         for i in range(3):
             yield final[i][0]
+
 
 def get_email(website):
     website = website
@@ -276,6 +284,7 @@ def get_email(website):
     else:
         return ""
 
+
 def getFaceAndTwit(e):
     youtube = e.xpath("//a[contains(@href,'youtube')]/@href")
     facebook = e.xpath("//a[contains(@href,'facebook')]/@href")
@@ -286,7 +295,8 @@ def getFaceAndTwit(e):
     count0 = 1 if youtube else 0
     count1 = 1 if facebook else 0
     count2 = 1 if twitter else 0
-    return {'count':count0+count1+count2,'result':{'facebook': facebook, 'twitter': twitter,'youtube':youtube}}
+    return {'count': count0 + count1 + count2, 'result': {'facebook': facebook, 'twitter': twitter, 'youtube': youtube}}
+
 
 # 如果有拿到联系我们的链接
 def getContactWeb(u, e):
@@ -301,19 +311,19 @@ def getContactWeb(u, e):
     if len(fres) == 0:
         return None
     else:
-        print("u  :" ,u)
+        print("u  :", u)
         u = u.split('/')[0] + '//' + u.split('/')[2] + "/"
-        print("u 2 :" ,u)
+        print("u 2 :", u)
 
-
-        for index,fr in enumerate(fres):
+        for index, fr in enumerate(fres):
             if fr.startswith('/'):
                 fres[index] = u + fr[1:]
             else:
                 fres[index] = u + fr
 
-        print("*******fres:",fres)
+        print("*******fres:", fres)
         return fres
+
 
 def getContactUs(contact_list, fat):
     for contactwebsite in contact_list:
@@ -346,13 +356,14 @@ def getContactUs(contact_list, fat):
                 if pam['mails']:
                     fat['result']['mails'] = [pam['mails']]
         else:
-        # 如果之前有mail，【mail】 那么追加【m1，m2】
+            # 如果之前有mail，【mail】 那么追加【m1，m2】
             if pam is not None:
                 if pam['mails']:
                     fat['result']['mails'].append(pam['mails'])
                     fat['result']['mails'].append(pam['mails'])
                     fat['result']['mails'] = list(set(fat['result']['mails']))
     return fat
+
 
 # 首先拿到公司网址的全链接，查看网址中是否有联系我们
 def getWebSource(website):
@@ -394,7 +405,6 @@ def getWebSource(website):
             # 存在联系我们的链接，且数据不够完全访问此链接并进行数据补充
             fat = getContactUs(contactUs_list, fat)
 
-
     print('fat:', type(fat), fat)
     fat['result']['mails'] = list(set(fat['result']['mails']))
     fat = dict(fat)
@@ -418,9 +428,10 @@ def getPaMFromHtml(resp):
     print('mailAll:', mail_list)
     mailAll = ';'.join(mail_list)
     if len(mailAll) != 0:
-        return  {'mails': mailAll}
+        return {'mails': mailAll}
     else:
         return None
+
 
 # 当调用这个的时候从网站源码中获取邮箱和电话（website必须是完整链接）
 def getPaM(website):
