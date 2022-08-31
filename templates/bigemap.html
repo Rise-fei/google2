@@ -9,8 +9,6 @@
     <script type="text/javascript" src="/static/js/jquery.table2excel.js"></script>
     <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script type="text/javascript" src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <link href='http://8.210.131.209:3000/bigemap.js/v2.1.0/bigemap.css' rel='stylesheet'/>
-    <script src='http://8.210.131.209:3000/bigemap.js/v2.1.0/bigemap.js'></script>
     <link rel='stylesheet' href='/static/css/bigemap.css'/>
     <script src='/static/js/FileSaver.js'></script>
 
@@ -34,7 +32,6 @@
                     </button>
                     <a target="_blank" href="http://sstrade.net/"><img src="/static/img/blogo.png"
                                                                        style="width: 130px;padding-top: 4px;"></a>
-                    {#                    <a class="navbar-brand" target="_blank"  href="http://sstrade.net/">晟时科技</a>#}
 
                 </div>
 
@@ -140,90 +137,77 @@
         </div>
     </div>
 </div>
-<script>
 
-    //软件配置信息地址
-    BM.Config.HTTP_URL = 'http://8.210.131.209:3000';
-    // 在ID为map的元素中实例化一个地图，并设置地图的ID号为 bigemap.googlemap-streets，ID号程序自动生成，无需手动配置，并设置地图的投影为百度地图 ，中心点，默认的级别和显示级别控件
-    var map = BM.map('map', 'bigemap.googlemap-streets', {
-        center: [0, 0],
-        zoom: 2,
-        attributionControl: false,
-        zoomControl: true,
-        minZoom: 2
-    });
-    // 创建一个标记，添加到map中
-    {#var corner1 = BM.latLng(-180, 90);#}
-    {#var corner2 = BM.latLng(180, -90);#}
-    {#var bounds = BM.latLngBounds(corner1, corner2);#}
-    {#map.setMaxBounds(bounds)#}
-    //BM.map('map', 'bigemap.googlemap-satellite', {center: [ 30,104], zoom: 3,attributionControl:false, zoomControl: true});
-    var google_satellite = BM.tileLayer('bigemap.googlemap-satellite');
-    var google_street = BM.tileLayer('bigemap.googlemap-streets');
-    document.getElementById('satellite').addEventListener('click', function () {
-        //先移除一个图层 ，再添加一个图层
-        google_satellite.addTo(map);
-        google_street.remove(map);
-    });
+<script type='text/javascript'>
+    map = null;
+    pushpin = null;
+    loc = null;
+    path = null;
+    poly = null;
+    radius = 50000;
 
-    document.getElementById('street').addEventListener('click', function () {
-        google_satellite.remove(map);
-        google_street.addTo(map);
-    });
+    function change_radius(val){
+        radius = val;
+        move_center(pushpin.getLocation(), radius)
+    }
 
+    function loadMapScenario() {
+        map = new Microsoft.Maps.Map(document.getElementById('map'), {
+            center: new Microsoft.Maps.Location(30, 104),
+            mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+        });
+        pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
+        pushpin.setOptions({enableHoverStyle: true, enableClickedStyle: true});
+        map.entities.push(pushpin);
 
-    // 创建一个经纬度对象
-    var latlng = BM.latLng(40, 116.5);
-    var marker = BM.marker(latlng);
-    marker.addTo(map);
-    // 创建一个圆对象，指定位置和半径，并添加到map
-    var circle = BM.circle(latlng, {radius: 50000})
-    circle.addTo(map);
-    map.panTo(latlng);
-    BM.control.scale().addTo(map);
+        Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
+            //Request the user's location
+            loc = new Microsoft.Maps.Location(30, 104);
+            //Create an accuracy circle
+            path = Microsoft.Maps.SpatialMath.getRegularPolygon(loc, radius, 36, Microsoft.Maps.SpatialMath.Meters);
+            poly = new Microsoft.Maps.Polygon(path);
+            map.entities.push(poly);
+            map.setView({center: loc, zoom: 8});
+        });
 
-    map.on('click', function (e) {
-        // 获取当前点击的坐标，设置标记和地图为点击位置。
-        var position_temp = e.latlng;
-        marker.setLatLng(position_temp);
-        map.setView(position_temp);
+        Microsoft.Maps.Events.addHandler(map, 'viewchangeend', function () {
+            viewchangeend();
+        });
+        Microsoft.Maps.Events.addHandler(map, 'click', function (e) {
+            map_click(e);
+        });
 
-        var radius = parseInt(document.getElementById('select_meter').value);
-        circle.setRadius(radius);
-        circle.setLatLng(position_temp);
-    });
-    map.on('moveend', function (e) {
-        window.setTimeout(function () {
-            var div_size_y = map.getSize().y
-            var top_y = map.getPixelBounds().max.y
-            var bottom_y = map.getPixelBounds().min.y
-            var sw_positon = map.getBounds()._southWest
-            var ne_postion = map.getBounds()._northEast
-            var bottom_yy = map.latLngToContainerPoint(map.getBounds()._southWest).y
-            console.log(div_size_y, top_y, bottom_y, top_y - bottom_y);
-            var flag = (top_y < div_size_y || bottom_yy < div_size_y);
-            if (flag) {
-                console.log(11111111111);
-                map.flyTo(marker.getLatLng())
-            }
-        }, 2)
-        // 获取当前点击的坐标，设置标记和地图为点击位置。
-    });
+    }
 
+    function map_click(e) {
+        var new_loc = e.location;
+        map_move(new_loc.latitude, new_loc.longitude);
+    }
 
-    marker.on('click', function (e) {
-        window.setTimeout(function () {
-            map.setZoom(8);
-            map.panTo(marker.getLatLng())
-        }, 500)
-    });
+    function map_move(lat, lng){
+        var new_loc =  new Microsoft.Maps.Location(lat, lng);
+        move_center(new_loc, radius);
+        map.setView({center: new_loc});
 
+    }
 
-    marker.on('move', function (e) {
-        map.panTo(marker.getLatLng())
-    })
-    // 通过control将搜索框添加到map
+    function viewchangeend() {
+        var loc = map.getCenter();
+        console.log(loc)
+        //move_center(loc, radius)
+    }
 
+    function move_center(loc, radius) {
+        Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
+            var path = Microsoft.Maps.SpatialMath.getRegularPolygon(loc, radius, 36, Microsoft.Maps.SpatialMath.Meters);
+            poly.setLocations(path);
+            pushpin.setLocation(loc);
+        });
+    }
+</script>
+<script type='text/javascript'
+        src='https://cn.bing.com/api/maps/mapcontrol?branch=experimental&setmkt=zh-cn&key=AmspVgr1ahLMCwUkpaFoKYKKVUVLQXSNyCBXyyrr-ja7rswSPVXpogqL1oefhUXT&callback=loadMapScenario'
+        async defer>
 
 </script>
 
@@ -235,7 +219,7 @@
     /*
     *     $.ajaxSetup({
 
-        async: false,
+        : false,
 
     });
     * */
@@ -244,11 +228,9 @@
         var cur_dom = $(e);
         var lat = cur_dom.attr('lat');
         var lng = cur_dom.attr('lng');
-        console.log('click aa')
-        marker.setLatLng({lat: lat, lng: lng});
-        // {#map.setZoom(6);#}
-        map.panTo(marker.getLatLng())
-        circle.setLatLng(marker.getLatLng())
+        map_move(lat, lng);
+        console.log('click aa');
+
     }
 
     function click_search_detail_pro(e) {
@@ -328,19 +310,6 @@
     function click_delete_pro(e) {
         var cur_dom = $(e);
         cur_dom.parent().parent().remove();
-    }
-
-
-    function click_a() {
-        $('.search_result_name').click(function () {
-            var lat = $(this).attr('lat');
-            var lng = $(this).attr('lng');
-            console.log('click aa')
-            marker.setLatLng({lat: lat, lng: lng});
-            // {#map.setZoom(6);#}
-            map.panTo(marker.getLatLng())
-            circle.setLatLng(marker.getLatLng())
-        })
     }
 
     // 点击某一个具体的搜索详情
@@ -430,9 +399,6 @@
     // 将后端拼接的html 放入当前页面！！
     function get_search_list(data_html) {
         $('#table_content').append(data_html);
-        {#click_a();#}
-        {#click_search_detail();#}
-        {#click_delete();#}
     }
 
     function extra_search(word, current_lat, radius, current_lng) {
@@ -511,69 +477,19 @@
                 flag_search_all = false;
                 query_num = 0;
                 console.log('设置为0000000000000000')
-                // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
-                {#click_a();#}
-                {#click_delete();#}
             }
         }, 1000)
     }
 
     $(function () {
-
         // 选择范围
         $('#select_meter').change(function () {
             {#alert(1);#}
             var radius = parseInt($('#select_meter').val());
             {#circle.setCenter(marker.getPosition())#}
-            circle.setRadius(radius);
+            change_radius(radius);
         })
-        // 精准搜索（已废弃）
-        $('#search_button').click(function () {
-            alert('正在进行精准搜索！')
-            alert('请耐心等待，画面即将锁定！')
-            {#var position = marker.getLatLng();#}
-            {#var current_lat = position.lat;#}
-            {#var current_lng = position.lng;#}
-            var word = $('#pac-input').val();
-            {#var radius = $('#select_meter').val();#}
-            $.ajax({
-                url: '/search_word/',
-                type: 'post',
-                data: {
-                    'word': word,
-                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-                    {#'lat': current_lat,#}
-                    {#'lng': current_lng,#}
-                    {#'radius': radius,#}
-                },
-                success: function (ret) {
-                    if (ret.status == 1) {
-                        //搜索到具体位置了
-                        var data = ret.data
-                        var formatted_address = data.result.formatted_address
-                        var formatted_phone_number = data.result.formatted_phone_number
-                        var location = data.result.geometry.location;
-                        var name = data.result.name;
-                        alert('找到具体位置!');
-                        console.log(location)
 
-                        marker.setLatLng(location);
-                        circle.setLatLng(location);
-                        $('#table_content').append(ret.data_html);
-                        {#click_a();#}
-                        /*    } else if (ret.status == 0) {
-                        alert('查询到附近相关结果');
-                        var datas = ret.data.results;
-                        var data_html = ret.data_final_html;
-                        console.log(datas);
-                        get_search_list(datas, data_html)*/
-
-                    } else {
-                        alert(ret.msg)
-                    }
-                }
-            })
-        });
         // 以当前坐标为中心，半径为radius 进行附近搜索。
         $('#search_button2').click(function () {
             if (flag_search_all) {
@@ -588,9 +504,9 @@
                     alert('Searching nearby！')
                     alert('Please be patient！')
 
-                    var position = marker.getLatLng();
-                    var current_lat = position.lat;
-                    var current_lng = position.lng;
+                    var position = pushpin.getLocation();
+                    var current_lat = position.latitude;
+                    var current_lng = position.longitude;
 
                     var radius = $('#select_meter').val();
                     var index = 0;
@@ -725,49 +641,6 @@
                         clearInterval(t_search)
                     }
                 }, 3000)
-                {% comment %} for (var i = 0; i < li.length; i++) {
-                     var id_list = [];
-                     // 将每一个勾选状态的 placeid 放到一个列表中
-                     var id = li.eq(i).parent().parent().attr('id')
-                     id_list.push(id)
-                     // 将id_list 变为json串
-                     var ids = JSON.stringify(id_list)
-                     {#var li_len = li.length; // 1个3 秒   一共  3 * l * x = 100  x = 100/5/l = 20/l    100/l#}
-                     $.ajax({
-                         url: '/search_detail_by_ids/?place_ids=' + ids,
-                         type: 'get',
-                         error:function(){
-                             query_num++;
-                             var str_id = '#' + id;
-                             $(str_id).remove();
-                         },
-                         success: function (ret) {
-                             query_num++;
-                             if (ret.code == 1) {
-                                 // 将查询的详情信息放入页面中（将之前的tr删了，直接把新的替换过来）
-                                 var data = ret.data;
-                                 for (var i = 0; i < data.length; i++) {
-                                     var place_id = data[i].pid
-                                     var td_html = data[i].td_html
-                                     if (td_html) {
-                                         // 根据place_id 找到之前的tr，然后替换为新的td_html
-                                         var str_id = '#' + place_id;
-                                         $(str_id).replaceWith(td_html)
-                                     } else {
-                                         var str_id = '#' + place_id;
-                                         $(str_id).remove();
-                                     }
-                                 }
-                                 // 将信息替换后，重新调用 几个button的点击事件，否则不生效！！
-                                 //  click_a();
-                                 // click_delete();
-                             } else {
-                                 var str_id = '#' + id;
-                                 $(str_id).remove();
-                             }
-                         }
-                     })
-                 }{% endcomment %}
             }
 
 

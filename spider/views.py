@@ -14,6 +14,7 @@ from tools.query_email import *
 
 
 def save_db(count1=0, count2=0):
+    return
     try:
         conn = connections['beijingdb']
         print(conn)
@@ -248,24 +249,13 @@ def login(request):
     if request.session.get('is_login'):
         session_key = request.COOKIES.get('session_key')
         if session_key:
-            # 如果oa管理员通过一键下线当前客户所有终端，那么此web项目目前是不知道的，所以向主服务器发送请求查询一下
-            # 但是此方法不好，该每次发送请求，都要向主服务器查询，最好改成：
-            # ****（主服务器执行一键下线后，给当前web项目发送请求，告知当前项目哪一个客户下线了，在此web项目中加以判断，后续优化！！）
-            # print(1)
-            # url = 'http://www.sstrade.net:8080/ssapi/query_is_login?session_key=%s' % session_key
-            # url = 'http://www.sstrade.net:8888/ssapi/query_is_login?session_key=%s' % session_key
-            # print(url)
-            # res = requests.get(url)
-            # print(2)
-            # if res.content.decode() == 'yes':
-            if 1:
-                print('当前浏览器中存储的用户cookie：session_key在服务器端有对应的记录，即该用户是登录状态！')
-                record = CustLoginRecord.objects.filter(oa_session_key=session_key)
-                if record:
-                    print(record[0].oa_session_key)
-                    record[0].login_time = datetime.fromtimestamp(time.time())
-                    record[0].save()
-                return redirect('/bigemap/')
+            print('当前浏览器中存储的用户cookie：session_key在服务器端有对应的记录，即该用户是登录状态！')
+            record = CustLoginRecord.objects.filter(oa_session_key=session_key)
+            if record:
+                print(record[0].oa_session_key)
+                record[0].login_time = datetime.fromtimestamp(time.time())
+                record[0].save()
+            return redirect('/bigemap/')
     return render(request, 'login_log.html')
 
 
@@ -291,69 +281,43 @@ def login_check(request):
     version = settings.VERSION  # 后续改进
     print(username)
     print(password)
-    url = 'http://www.sstrade.net:8888/ssapi/customerlogin/?username=%s&password=%s&product=%s&version=%s' % (
-        username, password, product, version)
-    res = requests.get(url)
-    response_content = res.content.decode()
-    print(response_content)
-    if response_content == 'success':
+    if username == "admin" and password == "admin":
         ret = {
             'status': 1,
             'msg': '登录成功',
         }
         request.session['username'] = username
-        print(res.cookies)
+        session_id = "idfjkfkksafkl2342l43k4lk32lk4"
         request.session['is_login'] = True
         response = JsonResponse(ret)
-        response.set_cookie('session_key', res.cookies.get('sessionid'))
-        # request.session['session_key'] = res.cookies.get('sessionid')
-        # request.session.set_expiry(0)
-        CustLoginRecord.objects.create(username=username, oa_session_key=res.cookies.get('sessionid'))
-        # 用户账号密码正确后，在登录记录表中 添加记录，并且成功返回登录后的界面。
-        # 接下来将表中超过授权数的 登录日期早的用户t下线。
-
-        # 向oa系统发送请求，查询当前username对应的product授权数。
-        url = 'http://www.sstrade.net:8888/ssapi/query_cust_auth_num?username=%s&product=%s' % (username, product)
-        res = requests.get(url).content.decode()
-        authorization_num = int(res)
-        if authorization_num == 0:
-            print('当前用户和产品不匹配')
-        else:
-            cust_records = CustLoginRecord.objects.filter(username=username).order_by('-login_time')
-            if len(cust_records) < authorization_num:
-                pass
-            else:
-                # cust_records =cust_records.
-                for cust in cust_records[authorization_num:]:
-                    # 超出授权数，向oa系统发送请求清除当前sessionkey对应的session信息。
-                    oa_session_key = cust.oa_session_key
-                    url = 'http://www.sstrade.net:8888/ssapi/logoutaccount2?session_key=%s' % oa_session_key
-                    res = requests.get(url)
-                    response_content = res.content.decode()
-                    print(response_content)
-                    cust.delete()
+        response.set_cookie('session_key', session_id)
+        CustLoginRecord.objects.create(username=username, oa_session_key=session_id)
 
     else:
-        if response_content == 'login is full':
-            ret = {
-                'status': 0,
-                'msg': '登录账号已到达最大授权数',
-            }
-        elif response_content == 'fail':
-            ret = {
-                'status': -1,
-                'msg': '用户名或密码错误',
-            }
-        elif response_content == 'out of service time':
-            ret = {
-                'status': -1,
-                'msg': '超出产品服务时间',
-            }
-        else:
-            ret = {
-                'status': -1,
-                'msg': '请使用新版本！！！',
-            }
+        # if response_content == 'login is full':
+        #     ret = {
+        #         'status': 0,
+        #         'msg': '登录账号已到达最大授权数',
+        #     }
+        # elif response_content == 'fail':
+        #     ret = {
+        #         'status': -1,
+        #         'msg': '用户名或密码错误',
+        #     }
+        # elif response_content == 'out of service time':
+        #     ret = {
+        #         'status': -1,
+        #         'msg': '超出产品服务时间',
+        #     }
+        # else:
+        #     ret = {
+        #         'status': -1,
+        #         'msg': '请使用新版本！！！',
+        #     }
+        ret = {
+            'status': -1,
+            'msg': '用户名或密码错误',
+        }
         request.session['is_login'] = False
         request.COOKIES['session_key'] = ""
         response = JsonResponse(ret)
@@ -550,7 +514,7 @@ def search_word(request):
 
 """
 def search_detail(place_id,word):
-    key = settings.google_map_key
+    key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
     language = 'zh-CN'
     fields = 'address_component,adr_address,business_status,formatted_address,geometry,icon,name,permanently_closed,photo,place_id,plus_code,type,url,utc_offset,vicinity,' \
              'price_level,rating,review,user_ratings_total,' \
@@ -629,7 +593,7 @@ def search_place_text(request):
     # lng = request.POST.get('lng')
     word = request.POST.get('word')
     # radius = request.POST.get('radius')
-    key = settings.google_map_key
+    key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
     fields = 'place_id,formatted_address,name,types,geometry'
     language = 'en'
     url = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?' \
@@ -703,10 +667,13 @@ def search_detail_by_ids(request):
 
 
 def search_near_by_latlng(lat, lng, word, radius):
+    print(settings.PRODUCT)
+    # print(settings.google_map_key)
     location = '%s,%s' % (lat, lng)
     radius = radius
     query = word
-    key = settings.google_map_key
+    # key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
+    key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
     language = 'en'
     # 第一次发送请求搜寻地点获取 地点id,方便后续地点详情使用。
     url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&radius=%s&language=%s&keyword=%s&key=%s' \
@@ -727,7 +694,7 @@ def search_near_by(lat, lng, word, radius, cname):
     # location = '%s,%s' % (lat, lng)
     # radius = radius
     # query = word
-    # key = settings.google_map_key
+    # key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
     # language = 'zh-CN'
     # # 第一次发送请求搜寻地点获取 地点id,方便后续地点详情使用。
     # url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&radius=%s&language=%s&keyword=%s&key=%s' \
@@ -778,7 +745,7 @@ def search_near_by(lat, lng, word, radius, cname):
             print('下一页的token：%s' % next_page_token)
             # data['test'].extend([1,2])
             print('还有数据，接着请求！')
-            key = settings.google_map_key
+            key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
             next_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=%s&pagetoken=%s" % (
                 key, next_page_token)
             next_res = requests.get(next_url)
@@ -910,7 +877,7 @@ def search_detail(place_id, word, p_obj, cname):
     else:
         rc = RequestDetailCount.objects.create(count=0, month=month, year=year, customer=cust_name)
 
-    key = settings.google_map_key
+    key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
     language = 'en'
     fields = 'address_component,adr_address,business_status,formatted_address,geometry,icon,name,permanently_closed,photo,place_id,plus_code,type,url,utc_offset,vicinity,' \
              'price_level,rating,review,user_ratings_total,' \
@@ -983,10 +950,9 @@ def search_detail(place_id, word, p_obj, cname):
         if d_website:
             try:
                 SERVER_LIST = [
-                    "47.252.3.225:8080",  # 美国服务器1
-                    "147.139.6.71:8080",  # 印度服务器
-                    # "47.88.19.94:8080",# 美国服务器2
-                    "47.254.241.59:8080",  # 马来西亚
+                      "8.219.43.39:80",
+                         "47.88.79.176:80",
+                         "47.90.252.192:80",
                 ]
                 server = random.choice(SERVER_LIST)
                 url = 'http://{}/get_socials/?website={}'.format(server, d_website)
@@ -1151,7 +1117,7 @@ def extra_search_near_by(lat, lng, word, radius, cname):
                 print('下一页的token：%s' % next_page_token)
                 # data['test'].extend([1,2])
                 print('还有数据，接着请求！')
-                key = settings.google_map_key
+                key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
                 next_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=%s&pagetoken=%s" % (
                     key, next_page_token)
                 next_res = requests.get(next_url)

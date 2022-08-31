@@ -7,7 +7,7 @@ from django.conf import settings
 # print(ret.content)
 
 
-key = settings.google_map_key
+key = "AIzaSyAp8xSTcyE0L4eYUi_EPKCFlIW2KhLp3JA"
 language = 'en'
 fields = 'address_component,adr_address,business_status,formatted_address,geometry,icon,name,permanently_closed,photo,place_id,plus_code,type,url,utc_offset,vicinity,' \
          'price_level,rating,review,user_ratings_total,' \

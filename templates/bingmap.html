@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>loadmapsyncHTML</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <style type='text/css'>body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: 'Segoe UI', Helvetica, Arial, Sans-Serif
+    }</style>
+</head>
+<body>
+<div id='printoutPanel'></div>
+
+<div id='map' style='width: 100vw; height: 100vh;'></div>
+<script type='text/javascript'>
+    map = null;
+    pushpin = null;
+    loc = null;
+    path = null;
+    poly = null;
+    radius = 1000;
+
+    function change_radius(val){
+        radius = val;
+    }
+
+    function loadMapScenario() {
+        map = new Microsoft.Maps.Map(document.getElementById('map'), {
+            center: new Microsoft.Maps.Location(30, 104),
+            mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+            zoom: 3,
+        });
+        pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
+        pushpin.setOptions({enableHoverStyle: true, enableClickedStyle: true});
+        map.entities.push(pushpin);
+
+        Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
+            //Request the user's location
+            loc = new Microsoft.Maps.Location(30, 104);
+            //Create an accuracy circle
+            path = Microsoft.Maps.SpatialMath.getRegularPolygon(loc, radius, 36, Microsoft.Maps.SpatialMath.Meters);
+            poly = new Microsoft.Maps.Polygon(path);
+            map.entities.push(poly);
+            map.setView({center: loc, zoom: 15});
+        });
+
+        Microsoft.Maps.Events.addHandler(map, 'viewchangeend', function () {
+            viewchangeend();
+        });
+        Microsoft.Maps.Events.addHandler(map, 'click', function (e) {
+            map_click(e);
+        });
+
+    }
+
+      function map_click(e) {
+        var new_loc = e.location;
+        move_center(new_loc, radius);
+        map_move(new_loc.latitude, new_loc.longitude);
+    }
+     function map_move(lat, lng){
+        var new_loc =  new Microsoft.Maps.Location(lat, lng);
+        map.setView({center: new_loc});
+    }
+
+    function viewchangeend() {
+        var loc = map.getCenter();
+        console.log(loc)
+       // move_center(loc, radius)
+    }
+
+    function move_center(loc, radius) {
+        Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
+            var path = Microsoft.Maps.SpatialMath.getRegularPolygon(loc, radius, 36, Microsoft.Maps.SpatialMath.Meters);
+            poly.setLocations(path);
+            pushpin.setLocation(loc);
+        });
+    }
+</script>
+<script type='text/javascript'
+        src='https://cn.bing.com/api/maps/mapcontrol?branch=experimental&setmkt=zh-cn&key=AmspVgr1ahLMCwUkpaFoKYKKVUVLQXSNyCBXyyrr-ja7rswSPVXpogqL1oefhUXT&callback=loadMapScenario'
+        async defer></script>
+</body>
+</html>
